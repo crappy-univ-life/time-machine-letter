@@ -1,11 +1,18 @@
 body{
     color:white;
-    background-color: #141414;
+    background-color: #121212 ;
 }
 
 h1{
     color:white;
     font-family: 'WandohopeB';
+}
+
+.ant-card-meta-description{
+    color:white
+}
+.ant-card-meta-title{
+    color:white
 }
 
 @font-face {
