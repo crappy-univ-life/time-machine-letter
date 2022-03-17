@@ -14,24 +14,14 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("/user/login")
-    public CreateMemberResponse saveMember(@RequestBody Member member) {
-        System.out.println(member);
-        String email = memberService.join(member);
-        return new CreateMemberResponse(email);
+    @PostMapping("/auth/kakao/callback")
+    public String kakaoLoginRequest(@RequestBody String authorizedCode) {
+        memberService.kakaoLogin(authorizedCode);
+        return "redirect:/";
     }
 
     @PostMapping("/user/logout")
-    public boolean saveMember() {
+    public boolean saveMemberRequest() {
         return true;
     }
-
-    @Data
-    static class CreateMemberResponse {
-        private String email;
-        public CreateMemberResponse(String email) {
-            this.email = email;
-        }
-    }
-
 }

@@ -26,4 +26,5 @@ public class MemberRepository {
                 .setParameter("email", email)
                 .getResultList();
     }
+
 }
