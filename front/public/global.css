@@ -15,6 +15,39 @@ h1{
     color:white
 }
 
+.ant-picker{
+    background-color: #383838;
+}
+.ant-modal-content{
+    background-color: #383838;
+}
+.ant-modal-header{
+    background-color: #383838;
+}
+
+.ant-input {
+    background-color: #383838;
+    color:white
+}
+.ant-input-group *{
+    background-color: #383838;
+    color:white;
+    border:none;
+}
+.ant-input-password{
+    background-color: #383838;
+    color:white
+}
+.ant-input-password-icon{
+    color:white !important
+}
+.ant-picker-input *{
+    color:white !important
+}
+.ant-modal-content *{
+    color: white;
+}
+
 @font-face {
     font-family: 'WandohopeB';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeB.woff') format('woff');
