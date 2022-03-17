@@ -1,13 +1,17 @@
 import { LoginOutlined, LogoutOutlined, PlusSquareTwoTone, SendOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Image, Layout, Menu, Row } from 'antd';
+import { Button, Card, Col, Image, Layout, Menu, Row, Tabs } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Content, Header } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
+import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
+
+const { TabPane } = Tabs;
 
 function Main() {
   return (
     <>
+
       <Row className={style.header} align="center">
         <Col md={12} xs={20}>
           <Image
@@ -24,20 +28,13 @@ function Main() {
       </Row>
       <Row className={style.content}>
         <Col md={12}>
-          <Row gutter={[20, 20]} align="center" sm={12}>
-            <Col lg={12} xs={22}>
-              <Card bordered={false} hoverable className={style.card}><Meta title="2022-03-16" description="천진우에게 " /></Card>
-            </Col>
-            <Col lg={12} xs={22}>
-              <Card bordered={false} hoverable className={style.card}><Meta title="2022-03-16" description="천진우에게 " /></Card>
-            </Col>
-            <Col lg={12} xs={22}>
-              <Card bordered={false} hoverable className={style.card}><Meta title="2022-03-16" description="천진우에게 " /></Card>
-            </Col>
-            <Col lg={12} xs={22}>
-              <Card bordered={false} hoverable className={style.card}><Meta title="2022-03-16" description="천진우에게 " /></Card>
-            </Col>
-          </Row>
+          <Tabs defaultActiveKey="1" style={{ padding: '10px' }}>
+            <TabPane tab="전체 편지" key="1">
+              <LetterList />
+            </TabPane>
+            <TabPane tab="열람 불가 편지" key="2" />
+            <TabPane tab="열람 가능 편지" key="3" />
+          </Tabs>
           <Row className={style.content}>
             <Col>
               <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} />
