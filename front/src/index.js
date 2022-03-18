@@ -5,11 +5,11 @@ import 'antd/dist/antd.css';
 import 'antd-button-color/dist/css/style.css';
 import Main from './pages/Main';
 import Letter from './components/Letter';
-import LetterLoading from './components/LetterLoading';
+import LetterDetail from './components/LetterDetail';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LetterLoading />
+    <LetterDetail />
   </React.StrictMode>,
   document.getElementById('root'),
 );
