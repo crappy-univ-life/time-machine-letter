@@ -4,11 +4,12 @@ import App from './pages/App';
 import 'antd/dist/antd.css';
 import 'antd-button-color/dist/css/style.css';
 import Main from './pages/Main';
-import WriteLetter from './components/WriteLetter';
+import Letter from './components/Letter';
+import LetterDetail from './components/LetterDetail';
 
 ReactDOM.render(
   <React.StrictMode>
-    <WriteLetter />
+    <LetterDetail />
   </React.StrictMode>,
   document.getElementById('root'),
 );
