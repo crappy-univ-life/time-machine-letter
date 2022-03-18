@@ -25,7 +25,6 @@ function Letter() {
             <h1>수신 디자이너</h1>
           </Col>
         </Row>
-
       </Col>
     </Row>
   );
