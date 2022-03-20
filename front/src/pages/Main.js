@@ -23,7 +23,6 @@ function Main() {
         </Col>
         <Col style={{ marginTop: '30px' }}>
           <LoginOutlined className={style.LoginOutlined} />
-          {/* 로그아웃 창은 아이콘을 써서 구현합시다 */}
         </Col>
       </Row>
       <Row className={style.content}>
