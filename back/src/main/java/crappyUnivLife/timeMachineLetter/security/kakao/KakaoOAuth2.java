@@ -4,11 +4,12 @@ import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
 import org.json.JSONObject;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-
+@Service
 public class KakaoOAuth2 {
 
     String client_id = "";
