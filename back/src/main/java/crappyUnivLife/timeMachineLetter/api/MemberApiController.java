@@ -14,10 +14,9 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("/auth/kakao/callback")
+    @PostMapping("/user/login")
     public String kakaoLoginRequest(@RequestBody String authorizedCode) {
-        memberService.kakaoLogin(authorizedCode);
-        return "redirect:/";
+        return memberService.kakaoLogin(authorizedCode); // return email
     }
 
     @PostMapping("/user/logout")
@@ -25,3 +24,4 @@ public class MemberApiController {
         return true;
     }
 }
+ 

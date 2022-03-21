@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class KakaoOAuth2 {
 
+    String client_id = "";
+
     public Member getUserInfo(String authorizedCode) {
         String accessToken = getAccessToken(authorizedCode);
         Member userInfo = getUserInfoByAccessToken(accessToken);
@@ -27,8 +29,8 @@ public class KakaoOAuth2 {
         // HTTP body 생성
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
-        params.add("client_id", "061c330df40caa1c445c3e168edd4e41");
-        params.add("redirect_uri", "http://localhost:8080/kakao_callback");
+        params.add("client_id", client_id);
+        params.add("redirect_uri", "http://localhost:3000/kakao_callback");
         params.add("code", authorizedCode);
 
         // HTTP Header와 HTTP Body를 하나의 오브젝트에 담기
@@ -44,7 +46,7 @@ public class KakaoOAuth2 {
                 String.class
         );
 
-        // json에서 토큰 파싱
+        // json 에서 토큰 파싱
         String tokenJson = response.getBody();
         JSONObject rjson = new JSONObject(tokenJson);
 
