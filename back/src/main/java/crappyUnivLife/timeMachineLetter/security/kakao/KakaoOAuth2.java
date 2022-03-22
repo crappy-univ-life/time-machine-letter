@@ -14,15 +14,13 @@ public class KakaoOAuth2 {
 
     String client_id = "";
 
-    public Member getUserInfo(String authorizedCode) {
-        String accessToken = getAccessToken(authorizedCode);
+    public Member getUserInfo(String accessToken) {
         Member userInfo = getUserInfoByAccessToken(accessToken);
-
         return userInfo;
     }
 
 
-    private String getAccessToken(String authorizedCode) {
+    public String getAccessToken(String authorizedCode) {
         //HTTP header 생성
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -54,7 +52,7 @@ public class KakaoOAuth2 {
         return rjson.getString("access_token");
     }
 
-    private Member getUserInfoByAccessToken(String accessToken) {
+    public Member getUserInfoByAccessToken(String accessToken) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");

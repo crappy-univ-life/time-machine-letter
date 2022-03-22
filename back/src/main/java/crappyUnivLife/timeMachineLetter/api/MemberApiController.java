@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
@@ -15,9 +17,9 @@ public class MemberApiController {
     private final MemberService memberService;
 
     @PostMapping("/user/login")
-    public String kakaoLoginRequest(@RequestBody String authorizedCode) {
-        System.out.println();
-        return memberService.kakaoLogin(authorizedCode); // return email
+    public String kakaoLoginRequest(@RequestBody String authorizedCode, HttpSession session) {
+        Member member = memberService.kakaoLogin(authorizedCode, session);
+        return member.getEmail(); // return email
     }
 
     @PostMapping("/user/logout")
