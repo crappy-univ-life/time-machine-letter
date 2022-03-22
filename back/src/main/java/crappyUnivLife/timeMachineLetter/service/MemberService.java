@@ -20,9 +20,14 @@ public class MemberService {
 
     public String kakaoLogin(String authorizedCode) {
         Member member = kakaoOAuth2.getUserInfo(authorizedCode);
-        validateDuplicateMember(member);
-        memberRepository.save(member);
-        return member.getEmail();
+        if(isDuplicateMember(member)) {
+            System.out.println("기존 회원 : " + member.getEmail());
+            return "기존 회원 : " + member.getEmail();
+        } else {
+            memberRepository.save(member);
+            System.out.println("새로운 회원 : " + member.getEmail());
+            return "새로운 회원 : " + member.getEmail();
+        }
 
 //        로그인 처리 부분
 //        Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(username, password);
@@ -30,10 +35,12 @@ public class MemberService {
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    private void validateDuplicateMember(Member member) {
+    private boolean isDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
         if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원");
+            return false;
+        } else {
+            return true;
         }
     }
 

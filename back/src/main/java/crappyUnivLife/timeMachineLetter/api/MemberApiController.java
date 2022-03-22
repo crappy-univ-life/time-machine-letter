@@ -16,6 +16,7 @@ public class MemberApiController {
 
     @PostMapping("/user/login")
     public String kakaoLoginRequest(@RequestBody String authorizedCode) {
+        System.out.println();
         return memberService.kakaoLogin(authorizedCode); // return email
     }
 
