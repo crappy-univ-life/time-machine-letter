@@ -23,8 +23,9 @@ public class MemberApiController {
     }
 
     @PostMapping("/user/logout")
-    public boolean saveMemberRequest() {
-        return true;
+    public String saveMemberRequest(HttpSession session) {
+        return memberService.kakaoLogout(session);
+        // return email when sccess
     }
 }
  

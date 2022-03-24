@@ -22,6 +22,7 @@ public class MemberService {
     private final KakaoOAuth2 kakaoOAuth2;
 
     public Member kakaoLogin(String authorizedCode, HttpSession session) {
+
         String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
@@ -37,14 +38,25 @@ public class MemberService {
         return member;
     }
 
-    private boolean isNewMember(Member member) {
-        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
-        if (findMembers.isEmpty()) {
-            return true;
+    public String kakaoLogout(HttpSession session) {
+
+        String accessToken = (String)session.getAttribute("accessToken");
+        String email = (String)session.getAttribute("userEmail");
+
+        if (accessToken != null) {
+            kakaoOAuth2.kakaoLogout(accessToken);
+            session.removeAttribute("access_Token");
+            session.removeAttribute("userEmail");
+            return email;
         } else {
-            return false;
+            return null;
         }
     }
 
+    private boolean isNewMember(Member member) {
+
+        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
+        return findMembers.isEmpty();
+    }
 
 }

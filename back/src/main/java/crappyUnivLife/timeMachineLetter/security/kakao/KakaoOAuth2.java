@@ -9,6 +9,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 @Service
 public class KakaoOAuth2 {
 
@@ -74,5 +76,25 @@ public class KakaoOAuth2 {
         String nickname = body.getJSONObject("properties").getString("nickname");
 
         return new Member(email, nickname);
+    }
+
+    public void kakaoLogout(String access_Token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + access_Token);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers);
+
+        //유저 정보 post 요청.
+        ResponseEntity<String> response = rt.exchange(
+                "https://kapi.kakao.com/v1/user/logout",
+                HttpMethod.POST,
+                kakaoProfileRequest,
+                String.class
+        );
+        System.out.println("로그아웃결과");
+        System.out.println(response);
+        return;
     }
 }
