@@ -1,6 +1,7 @@
 package crappyUnivLife.timeMachineLetter.api;
 
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class MemberApiController {
     private final MemberService memberService;
 
     @PostMapping("/user/login")
-    public String kakaoLoginRequest(@RequestBody String authorizedCode, HttpSession session) {
-        Member member = memberService.kakaoLogin(authorizedCode, session);
-        return member.getEmail(); // return email
+    public PostListResponse kakaoLoginRequest(@RequestBody String authorizedCode, HttpSession session) {
+        PostListResponse postListResponse = memberService.kakaoLogin(authorizedCode, session);
+        return postListResponse;
     }
 
     @PostMapping("/user/logout")
