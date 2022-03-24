@@ -1,7 +1,9 @@
 package crappyUnivLife.timeMachineLetter.service;
 
+import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
+import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +24,14 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public Member kakaoLogin(String authorizedCode, HttpSession session) {
+    public PostListResponse kakaoLogin(String authorizedCode, HttpSession session) {
+
+        // for test response
+        ArrayList<Letter> letterList = new ArrayList<>();
+        letterList.add(new Letter());
+        letterList.add(new Letter());
+        PostListResponse postListResponse = new PostListResponse("woojin8787", letterList);
+        //
 
         String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
@@ -35,7 +45,7 @@ public class MemberService {
         session.setAttribute("userEmail", member.getEmail());
         session.setAttribute("accessToken", accessToken);
 
-        return member;
+        return postListResponse;
     }
 
     public String kakaoLogout(HttpSession session) {
