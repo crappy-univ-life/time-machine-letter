@@ -14,7 +14,7 @@ import java.io.IOException;
 @Service
 public class KakaoOAuth2 {
 
-    String client_id = "";
+    String client_id = "061c330df40caa1c445c3e168edd4e41";
 
     public Member getUserInfo(String accessToken) {
         Member userInfo = getUserInfoByAccessToken(accessToken);
