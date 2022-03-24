@@ -3,15 +3,18 @@ import { Button, Card, Col, Image, Layout, Menu, Row, Tabs } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Content, Header } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
+import { useState } from 'react';
 import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
+import useModal from '../Hooks/useModal';
+import WriteLetter from '../components/WriteLetter';
 
 const { TabPane } = Tabs;
 
 function Main() {
+  const { openModal: openWrite, closeModal: closeWrite, modal: visibleWrite } = useModal();
   return (
     <>
-
       <Row className={style.header} align="center">
         <Col md={12} xs={20}>
           <Image
@@ -36,7 +39,8 @@ function Main() {
           </Tabs>
           <Row className={style.content}>
             <Col>
-              <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} />
+              <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={openWrite} />
+              <WriteLetter modal={visibleWrite} clsoeModal={closeWrite} />
             </Col>
           </Row>
         </Col>

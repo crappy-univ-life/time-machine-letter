@@ -4,10 +4,10 @@ import { useGetUserTokenMutation } from '../service/login';
 
 function KakaoHandler() {
   const accessCode = new URL(window.location.href).searchParams.get('code');
-  console.log(accessCode);
   const [getUserToken, result] = useGetUserTokenMutation();
   const getToken = async () => {
-    await getUserToken(accessCode);
+    const token = await getUserToken(accessCode);
+    console.log(token);
   };
   useEffect(() => {
     getToken();
