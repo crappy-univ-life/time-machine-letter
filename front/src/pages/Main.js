@@ -3,7 +3,9 @@ import { Button, Card, Col, Image, Layout, Menu, Row, Tabs } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Content, Header } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
@@ -13,6 +15,15 @@ const { TabPane } = Tabs;
 
 function Main() {
   const { openModal: openWrite, closeModal: closeWrite, modal: visibleWrite } = useModal();
+
+  const user = useSelector((state) => state.auth.email);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user]);
+
   return (
     <>
       <Row className={style.header} align="center">
