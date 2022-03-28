@@ -3,6 +3,7 @@ package crappyUnivLife.timeMachineLetter.security.kakao;
 import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -14,7 +15,8 @@ import java.io.IOException;
 @Service
 public class KakaoOAuth2 {
 
-    String client_id = "";
+    @Value("{login-api.key.kakao}")
+    private String client_id;
 
     public Member getUserInfo(String accessToken) {
         Member userInfo = getUserInfoByAccessToken(accessToken);
