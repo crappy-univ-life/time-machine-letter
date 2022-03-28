@@ -2,6 +2,7 @@
 import { Button, Col, Image, Progress, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import kakaoBtn from '../img/kakao_login_medium_wide.png';
+import { useGetDataQuery } from '../service/login';
 
 function App() {
   const KakaoLogin = () => {

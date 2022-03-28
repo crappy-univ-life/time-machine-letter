@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const LoginApi = createApi({
   reducerPath: 'LoginApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://3.36.61.14:8080/user/',
+    baseUrl: 'http://timemachineletter.tk:8080/user/',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
       headers.set('Access-Control-Allow-Origin', 'http://3.36.61.14:8080/');
@@ -22,7 +22,7 @@ export const LoginApi = createApi({
     }),
     getData: builder.query({
       query: () => ({
-        url: 'data',
+        url: 'letter',
       }),
     }),
   }),
