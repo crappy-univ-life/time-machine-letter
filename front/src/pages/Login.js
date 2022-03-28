@@ -1,7 +1,13 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Button, Col, Image, Progress, Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import kakaoBtn from '../img/kakao_login_medium_wide.png';
 
 function App() {
+  const KakaoLogin = () => {
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
+    window.location.href = KAKAO_AUTH_URL;
+  };
   return (
     <Row justify="center" align="middle" style={{ height: '100vh', textAlign: 'center' }}>
       <Col>
@@ -18,7 +24,7 @@ function App() {
             <h1>타임머신 편지</h1>
           </Col>
           <Col xs={24}>
-            <img src={kakaoBtn} alt="카카오 로그인" />
+            <img src={kakaoBtn} alt="카카오 로그인" onClick={KakaoLogin} />
           </Col>
           <Col xs={24}>
             <hr />
