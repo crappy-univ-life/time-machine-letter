@@ -10,6 +10,7 @@ import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
+import { useGetDataQuery } from '../service/login';
 
 const { TabPane } = Tabs;
 

@@ -5,7 +5,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const LoginApi = createApi({
   reducerPath: 'LoginApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://13.125.226.184:8080/user/',
+    baseUrl: 'http://3.36.61.14:8080/user/',
+    credentials: 'include',
+    prepareHeaders: (headers, { getState }) => {
+      headers.set('Access-Control-Allow-Origin', 'http://3.36.61.14:8080/');
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     getUserToken: builder.mutation({
@@ -15,11 +20,14 @@ export const LoginApi = createApi({
         body: code,
       }),
     }),
-
+    getData: builder.query({
+      query: () => ({
+        url: 'data',
+      }),
+    }),
   }),
 });
-console.log(LoginApi);
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserTokenMutation } = LoginApi;
+export const { useGetUserTokenMutation, useGetDataQuery } = LoginApi;
