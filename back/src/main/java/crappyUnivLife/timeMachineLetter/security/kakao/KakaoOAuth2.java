@@ -15,7 +15,7 @@ import java.io.IOException;
 @Service
 public class KakaoOAuth2 {
 
-    @Value("{login-api.key.kakao}")
+    @Value("${login-api.key.kakao}")
     private String client_id;
 
     public Member getUserInfo(String accessToken) {
@@ -33,7 +33,8 @@ public class KakaoOAuth2 {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", client_id);
-        params.add("redirect_uri", "http://localhost:3000/kakao_callback");
+//        params.add("redirect_uri", "http://localhost:3000/kakao_callback");
+        params.add("redirect_uri", "http://timemachineletter.tk/kakao_callback");
         params.add("code", authorizedCode);
 
         // HTTP Header와 HTTP Body를 하나의 오브젝트에 담기
