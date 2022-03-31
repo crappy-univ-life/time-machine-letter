@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { LetterApi } from '../service/Letter';
 
 const dummyState = {
   email: null,
@@ -38,13 +39,10 @@ const dummyState = {
 const slice = createSlice({
   name: 'letter',
   initialState: dummyState,
-  reducers: {
-    setCredentials: (
-      state,
-      action,
-    ) => {
-      state.email = action.payload.email;
-    },
+  extraReducers: (builder) => {
+    builder.addMatcher(LetterApi.endpoints.getSingleLetter.matchFulfilled, (state, action) => {
+      state.singleLetter = action.payload.result;
+    });
   },
 });
 

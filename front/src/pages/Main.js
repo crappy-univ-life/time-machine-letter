@@ -10,21 +10,18 @@ import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
-import { useGetDataQuery } from '../service/login';
 
 const { TabPane } = Tabs;
 
 function Main() {
   const { openModal: openWrite, closeModal: closeWrite, modal: visibleWrite } = useModal();
-
-  const { data, refetch } = useGetDataQuery();
   const user = useSelector((state) => state.auth.email);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate('/login');
+  //   }
+  // }, [user]);
 
   return (
     <>

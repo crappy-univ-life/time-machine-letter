@@ -20,9 +20,10 @@ export const LoginApi = createApi({
         body: code,
       }),
     }),
-    getData: builder.query({
+    logout: builder.mutation({
       query: () => ({
-        url: 'letter',
+        url: 'logout',
+        method: 'POST',
       }),
     }),
   }),
@@ -30,4 +31,4 @@ export const LoginApi = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserTokenMutation, useGetDataQuery } = LoginApi;
+export const { useGetUserTokenMutation } = LoginApi;
