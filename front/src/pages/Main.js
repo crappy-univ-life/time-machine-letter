@@ -17,12 +17,13 @@ const { TabPane } = Tabs;
 function Main() {
   const { openModal: openWrite, closeModal: closeWrite, modal: visibleWrite } = useModal();
 
-  const { data, refetch } = useGetDataQuery();
   const user = useSelector((state) => state.auth.email);
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
       navigate('/login');
+    } else {
+      const { data, refetch } = useGetDataQuery();
     }
   }, [user]);
 
