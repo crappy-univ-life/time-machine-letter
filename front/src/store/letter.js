@@ -1,17 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+const dummyState = {
+  email: null,
+  singleLetter: {
+    readable: true,
+    id: 3,
+    createAt: '2019-03-28',
+    openAt: new Date(),
+    title: '제목1',
+    content: '첫번째 테스트 본문입니다',
+    from: '개발자',
+    to: '뭐',
+  },
   letters: [{
     id: 3,
     createAt: '2019-03-28',
-    openAt: '2020-04-23-17-32-11',
-    title: '타이틀이다',
+    openAt: new Date(),
+    title: '제목1',
+  }, {
+    id: 4,
+    createAt: '2019-03-28',
+    openAt: new Date(),
+    title: '제목2',
+  }, {
+    id: 5,
+    createAt: '2019-03-28',
+    openAt: new Date(),
+    title: '제목3',
+  }, {
+    id: 6,
+    createAt: '2019-03-28',
+    openAt: new Date(),
+    title: '제목4',
   }],
 };
 
 const slice = createSlice({
-  name: 'auth',
-  initialState: { email: null },
+  name: 'letter',
+  initialState: dummyState,
   reducers: {
     setCredentials: (
       state,

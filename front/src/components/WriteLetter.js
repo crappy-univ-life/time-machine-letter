@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Modal, Button, Input, Checkbox, Col, Row, DatePicker, TimePicker, Form } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
-import useInput from '../Hooks/useInput';
 
 const { TextArea } = Input;
 
