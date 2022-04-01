@@ -1,18 +1,24 @@
 import React, { useRef, useState } from 'react';
 import { Modal, Button, Input, Checkbox, Col, Row, DatePicker, TimePicker, Form } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
+import { usePostLetterMutation } from '../service/Letter';
 
 const { TextArea } = Input;
 
 function WriteLetter({ modal, clsoeModal }) {
   const { register, handleSubmit, control } = useForm();
+  const [postLetter, result] = usePostLetterMutation();
   const formRef = useRef();
   const onSubmit = (data) => {
     const date = new Date(data.antdDatePicker);
     const time = new Date(data.antdTimePicker);
     const fullDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-    console.log(fullDate);
-    // data fetching
+    delete data.antdDatePicker;
+    delete data.antdTimePicker;
+    const snedData = { ...data, fullDate };
+    console.log(snedData);
+    // postLetter(data);
+    // data request
   };
   return (
 
@@ -58,16 +64,45 @@ function WriteLetter({ modal, clsoeModal }) {
             />
           </Col>
         </Row>
-
-        <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} {...register('from')} />
+        <Controller
+          control={control}
+          name="from"
+          render={({ field: { onChange, onBlur } }) => (
+            <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          )}
+        />
         <hr />
-        <Input.Password placeholder=" password" style={{ marginTop: '20px' }} bordered={false} {...register('password')} />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur } }) => (
+            <Input.Password placeholder=" password" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          )}
+        />
         <hr />
-        <Input placeholder="편지 제목" style={{ marginTop: '20px' }} bordered={false} {...register('title')} />
+        <Controller
+          control={control}
+          name="title"
+          render={({ field: { onChange, onBlur } }) => (
+            <Input placeholder="편지 제목" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          )}
+        />
         <hr />
-        <TextArea rows={8} placeholder="편지 본문" style={{ marginTop: '20px' }} bordered={false} {...register('content')} />
+        <Controller
+          control={control}
+          name="content"
+          render={({ field: { onChange, onBlur } }) => (
+            <TextArea rows={8} placeholder="편지 본문" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          )}
+        />
         <hr />
-        <Input addonBefore="수신인" style={{ marginTop: '20px' }} {...register('to')} />
+        <Controller
+          control={control}
+          name="title"
+          render={({ field: { onChange, onBlur } }) => (
+            <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} />
+          )}
+        />
         <hr />
       </Form>
     </Modal>
