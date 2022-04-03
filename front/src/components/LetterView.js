@@ -1,10 +1,12 @@
 import { CloseOutlined } from '@ant-design/icons';
 import { Card, Col, Image, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
+import { useDispatch, useSelector } from 'react-redux';
 import style from '../css/Main.module.css';
 import img from '../img/bonfire.jpg';
 
-function Letter({ data }) {
+function Letter() {
+  const data = useSelector((state) => state.letter.singleLetter);
   return (
     <Row className={style.content} style={{ height: '100vh%' }}>
       <Col md={10} xs={23} align="center" className={style.backgroundImg}>

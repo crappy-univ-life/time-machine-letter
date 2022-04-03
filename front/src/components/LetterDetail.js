@@ -1,47 +1,90 @@
-import { Button, Col, Modal, Row, Table } from 'antd';
+import { Button, Col, Modal, Row, Skeleton, Space, Table } from 'antd';
 import Countdown from 'antd/lib/statistic/Countdown';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
+import useModal from '../Hooks/useModal';
+import { useGetSingleLetterQuery } from '../service/Letter';
+import { closeDetailModal, openPreviewModal } from '../store/global';
+import LetterPreviewModal from './LetterPreviewModal';
+import LetterView from './LetterView';
 
-function LetterDetail({ closeModal, modal }) {
-  const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
-  const previewLetter = () => {
-    window.open('/letter/123123');
+const dummyQuery = () => {
+  const date = new Date('2022-04-04T23:50:00');
+  const dummy = {
+    readable: true,
+    id: 3,
+    createAt: '2019-03-28',
+    openAt: date,
+    title: '제목1',
+    content: '첫번째 테스트 본문입니다',
+    from: '개발자',
+    to: '뭐',
   };
-  return (
-    <Modal
-      title="2022-03-18"
-      visible={modal}
-      onCancel={closeModal}
-      footer={[
-        <Button type="info" onClick={previewLetter}>
-          미리보기
-        </Button>,
-        <Button type="success">
-          수정
-        </Button>,
-        <Button type="danger">
-          삭제
-        </Button>]}
-    >
-      <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
-        <Countdown title="개봉까지 남은시간" value={deadline} />
-        <hr />
-        <div style={{ padding: '10px' }}>
-          <h1>제목입니다</h1>
-        </div>
-        <div style={{ padding: '10px' }}>
-          <p>{'1.\n2.\n3.\n4.\n'}</p>
-        </div>
-      </div>
-      <hr />
-      <div style={{ textAlign: 'end' }}>
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(dummy);
+      }, 1000);
+    }).then((result) => { setData(result); setIsLoading(false); });
+  }, []);
+  return { isLoading, data };
+};
 
-        <p>발신자: 나</p>
-        <p>수신자: 너</p>
-      </div>
-    </Modal>
+const convertDeadLine = (date) => date.getTime();
+
+function LetterModal({ modal }) {
+  const dispatch = useDispatch();
+  // const { data } = useGetSingleLetterQuery();
+  const { isLoading, data } = dummyQuery();
+  return (
+    <>
+      <Modal
+        title="2022-03-18"
+        visible={modal}
+        onCancel={() => dispatch(closeDetailModal())}
+        footer={[
+          <Button type="info" onClick={() => dispatch(openPreviewModal())}>
+            미리보기
+          </Button>,
+          <Button type="success">
+            수정
+          </Button>,
+          <Button type="danger">
+            삭제
+          </Button>]}
+      >
+        <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
+          <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : convertDeadLine(data.openAt)} />
+          <hr />
+          <div style={{ padding: '10px' }}>
+            <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data.title}</h1>
+          </div>
+          <div style={{ padding: '10px' }}>
+            <p>{isLoading ? <Skeleton.Button active shape="round" /> : data.content }</p>
+          </div>
+        </div>
+        <hr />
+        <div style={{ textAlign: 'end' }}>
+          <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.from }</p>
+          <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.to }</p>
+        </div>
+      </Modal>
+      <LetterPreviewModal />
+    </>
+
+  );
+}
+
+function LetterDetail() {
+  const detailModal = useSelector((state) => state.global.detailModal);
+  return (
+    <>
+      {detailModal && <LetterModal modal={detailModal} />}
+    </>
   );
 }
 
