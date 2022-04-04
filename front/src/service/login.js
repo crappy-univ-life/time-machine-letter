@@ -1,14 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// Define a service using a base URL and expected endpoints
-
 export const LoginApi = createApi({
   reducerPath: 'LoginApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://timemachineletter.tk:8080/user/',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-      headers.set('Access-Control-Allow-Origin', 'http://3.36.61.14:8080/');
+      headers.set('Access-Control-Allow-Origin', 'http://timemachineletter.tk:8080/');
       return headers;
     },
   }),
