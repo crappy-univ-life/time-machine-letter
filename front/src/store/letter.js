@@ -16,24 +16,38 @@ const dummyState = {
   letters: [{
     id: 3,
     createAt: '2019-03-28',
-    openAt: JSON.stringify(new Date()),
+    openAt: JSON.stringify(new Date('2022-04-04T23:50:00')),
     title: '제목1',
   }, {
     id: 4,
     createAt: '2019-03-28',
-    openAt: JSON.stringify(new Date()),
+    openAt: JSON.stringify(new Date('2022-04-04T23:50:00')),
     title: '제목2',
   }, {
     id: 5,
     createAt: '2019-03-28',
-    openAt: JSON.stringify(new Date()),
+    openAt: JSON.stringify(new Date('2022-04-04T23:50:00')),
     title: '제목3',
   }, {
     id: 6,
     createAt: '2019-03-28',
-    openAt: JSON.stringify(new Date()),
+    openAt: JSON.stringify(new Date('2022-04-04T23:50:00')),
     title: '제목4',
-  }],
+  },
+  {
+    id: 7,
+    createAt: '2019-03-28',
+    openAt: JSON.stringify(new Date('2021-04-04T23:50:00')),
+    title: '제목1',
+  },
+  {
+    id: 8,
+    createAt: '2019-03-28',
+    openAt: JSON.stringify(new Date('2021-04-04T23:50:00')),
+    title: '제목1',
+  },
+
+  ],
 };
 
 const slice = createSlice({
