@@ -4,25 +4,25 @@ import Meta from 'antd/lib/card/Meta';
 import { Content, Header } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
+import { openWriteModal } from '../store/global';
 
 const { TabPane } = Tabs;
 
 function Main() {
-  const { openModal: openWrite, closeModal: closeWrite, modal: visibleWrite } = useModal();
   const user = useSelector((state) => state.auth.email);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // useEffect(() => {
   //   if (!user) {
   //     navigate('/login');
   //   }
   // }, [user]);
-
   return (
     <>
       <Row className={style.header} align="center">
@@ -49,8 +49,8 @@ function Main() {
           </Tabs>
           <Row className={style.content}>
             <Col>
-              <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={openWrite} />
-              <WriteLetter modal={visibleWrite} clsoeModal={closeWrite} />
+              <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={() => dispatch(openWriteModal())} />
+              <WriteLetter />
             </Col>
           </Row>
         </Col>

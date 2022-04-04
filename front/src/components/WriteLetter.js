@@ -1,39 +1,50 @@
 import React, { useRef, useState } from 'react';
 import { Modal, Button, Input, Checkbox, Col, Row, DatePicker, TimePicker, Form } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePostLetterMutation } from '../service/Letter';
+import { closeWriteModal, openPreviewModal } from '../store/global';
+import LetterPreviewModal from './LetterPreviewModal';
+import { setSingleLetter } from '../store/letter';
 
 const { TextArea } = Input;
 
-function WriteLetter({ modal, clsoeModal }) {
-  const { register, handleSubmit, control } = useForm();
+const convertSendDate = (data) => {
+  const date = new Date(data.antdDatePicker);
+  const time = new Date(data.antdTimePicker);
+  const fullDate = JSON.stringify(new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds()));
+  delete data.antdDatePicker;
+  delete data.antdTimePicker;
+  const sendData = { ...data, fullDate };
+  return sendData;
+};
+
+function WriteLetter() {
+  const modalVisible = useSelector((state) => state.global.writeModal);
+  const dispatch = useDispatch();
+  const { handleSubmit, control, getValues } = useForm();
   const [postLetter, result] = usePostLetterMutation();
   const formRef = useRef();
   const onSubmit = (data) => {
-    const date = new Date(data.antdDatePicker);
-    const time = new Date(data.antdTimePicker);
-    const fullDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-    delete data.antdDatePicker;
-    delete data.antdTimePicker;
-    const snedData = { ...data, fullDate };
-    console.log(snedData);
-    // postLetter(data);
-    // data request
+    const sendData = convertSendDate(data);
+    console.log(sendData);
+    // data fetch API
   };
   return (
 
     <Modal
       title="편지 작성"
-      visible={modal}
-      onCancel={clsoeModal}
+      visible={modalVisible}
+      onCancel={() => dispatch(closeWriteModal())}
       footer={[
-        <Button type="info">
+        <Button type="info" onClick={() => { dispatch(setSingleLetter(convertSendDate(getValues()))); dispatch(openPreviewModal()); }}>
           미리보기
         </Button>,
+        <LetterPreviewModal />,
         <Button type="primary" onClick={() => { formRef.current.submit(); }}>
           발송
         </Button>,
-        <Button type="danger" onClick={clsoeModal}>
+        <Button type="danger" onClick={() => dispatch(closeWriteModal())}>
           close
         </Button>]}
     >
@@ -98,7 +109,7 @@ function WriteLetter({ modal, clsoeModal }) {
         <hr />
         <Controller
           control={control}
-          name="title"
+          name="to"
           render={({ field: { onChange, onBlur } }) => (
             <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} />
           )}
