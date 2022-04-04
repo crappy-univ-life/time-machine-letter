@@ -6,13 +6,24 @@ import useModal from '../Hooks/useModal';
 import { openDetailModal } from '../store/global';
 import LetterDetail from './LetterDetail';
 
-function LetterList() {
+function LetterList({ openLetter, closeLetter, allLetter }) {
   const letterList = useSelector((state) => state.letter.letters);
+  const today = new Date();
+  console.log(today);
+  let showList;
   const dispatch = useDispatch();
+  if (openLetter) {
+    showList = letterList.filter((letter) => new Date(JSON.parse(letter.openAt)) < today);
+  } else if (closeLetter) {
+    showList = letterList.filter((letter) => new Date(JSON.parse(letter.openAt)) > today);
+  } else if (allLetter) {
+    showList = letterList;
+  }
+  console.log(showList);
   return (
     <>
       <Row gutter={[20, 20]} align="center" sm={12}>
-        {letterList.map((letter) => (
+        {showList.map((letter) => (
           <Col lg={12} xs={22}>
             <Card bordered={false} hoverable className={style.card} onClick={() => dispatch(openDetailModal())}><Meta title={letter.createAt} description={letter.title} /></Card>
           </Col>

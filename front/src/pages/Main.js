@@ -42,10 +42,14 @@ function Main() {
         <Col md={12}>
           <Tabs defaultActiveKey="1" style={{ padding: '10px' }}>
             <TabPane tab="전체 편지" key="1">
-              <LetterList />
+              <LetterList allLetter />
             </TabPane>
-            <TabPane tab="열람 불가 편지" key="2" />
-            <TabPane tab="열람 가능 편지" key="3" />
+            <TabPane tab="열람 불가 편지" key="2">
+              <LetterList closeLetter />
+            </TabPane>
+            <TabPane tab="열람 가능 편지" key="3">
+              <LetterList openLetter />
+            </TabPane>
           </Tabs>
           <Row className={style.content}>
             <Col>
