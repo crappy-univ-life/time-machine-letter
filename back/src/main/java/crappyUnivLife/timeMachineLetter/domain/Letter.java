@@ -16,17 +16,17 @@ public class Letter {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String letterPassword;
+    private String password;
 
-    private Date openTime;
+    private Date openAt;
 
     private String title;
 
-    private String mainContent;
+    private String content;
 
     private Long view_count;
 
-    private Date createTime;
+    private Date createAt;
 
     // 연관관계 편의 매서드 //
     public void setMember(Member member) {

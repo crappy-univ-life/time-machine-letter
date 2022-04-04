@@ -19,7 +19,7 @@ public class Member {
 
     private String email;
 
-    private Date createTime;
+    private Date createAt;
 
     @OneToMany(mappedBy = "member")
     private List<Letter> letter = new ArrayList<>();
