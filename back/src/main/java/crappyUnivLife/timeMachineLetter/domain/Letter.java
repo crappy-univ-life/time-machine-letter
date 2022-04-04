@@ -1,12 +1,14 @@
 package crappyUnivLife.timeMachineLetter.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Getter
+@Setter
 public class Letter {
     @Id @GeneratedValue
     @Column(name = "letter_id")

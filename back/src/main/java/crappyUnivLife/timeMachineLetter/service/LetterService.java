@@ -40,13 +40,21 @@ public class LetterService {
         return new PostListResponse(email, letterList);
     }
 
-    public Long writeLetter(String memberEmail) {
-        Member member = memberRepository.findByEmail(memberEmail).get(0);
+    public Long createLetter(Letter letter, HttpSession session) {
 
-        Letter letter = new Letter();
+        String accessToken = (String)session.getAttribute("accessToken");
+        String email = (String)session.getAttribute("userEmail");
 
-        letterRepository.save(letter);
-        return letter.getId();
+        if (accessToken != null) {
+            Member member = memberRepository.findByEmail(email).get(0);
+
+            letter.setMember(member);
+
+            return letterRepository.save(letter);
+
+        } else {
+            return null;
+        }
     }
 
     public Letter readLetter(Long letterId) {
