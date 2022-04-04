@@ -7,9 +7,8 @@ import style from '../css/Main.module.css';
 
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
-    return <div className="timer"><h1>로딩중...</h1></div>;
+    return <div className="timer"><h1>편지를 가져오는 중...</h1></div>;
   }
-  console.log(remainingTime);
   const hours = Math.floor(remainingTime / 3600).toString().padStart(2, '0');
   const minutes = Math.floor((remainingTime % 3600) / 60).toString().padStart(2, '0');
   const seconds = (remainingTime % 60).toString().padStart(2, '0');
@@ -24,13 +23,14 @@ const renderTime = ({ remainingTime }) => {
   );
 };
 
-function LetterLoading() {
-  const duration = 60;
+function LetterLoading({ data }) {
+  const now = new Date();
+  const duration = (data.date.getTime() - now.getTime()) / 1000;
   return (
     <Row className={style.content} style={{ height: '100vh', alignItems: 'center' }}>
       <Col md={10} xs={23} align="center">
         <Row>
-          <Col xs={24}><h1>FROM. 프론트</h1></Col>
+          <Col xs={24}><h1>From. {data.from}</h1></Col>
         </Row>
         <Row style={{ marginTop: '20px' }}>
           <Col xs={24}>

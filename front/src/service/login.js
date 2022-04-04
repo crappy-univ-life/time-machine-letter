@@ -18,12 +18,15 @@ export const LoginApi = createApi({
         body: code,
       }),
     }),
-    getData: builder.query({
+    logout: builder.mutation({
       query: () => ({
-        url: 'letter',
+        url: 'logout',
+        method: 'POST',
       }),
     }),
   }),
 });
 
-export const { useGetUserTokenMutation, useGetDataQuery } = LoginApi;
+// Export hooks for usage in function components, which are
+// auto-generated based on the defined endpoints
+export const { useGetUserTokenMutation } = LoginApi;

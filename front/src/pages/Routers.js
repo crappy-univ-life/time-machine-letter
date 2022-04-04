@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Login from './Login';
 import KakaoHandler from './KakaoHandler';
 import Main from './Main';
-import Letter from '../components/Letter';
+import Letter from '../components/LetterView';
 
 function Routers() {
   return (
