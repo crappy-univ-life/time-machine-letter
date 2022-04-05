@@ -5,16 +5,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class LetterRepository {
 
+    @PersistenceContext
     private final EntityManager em;
 
-    public void save(Letter letter) {
+    public Long save(Letter letter) {
         em.persist(letter);
+        return letter.getId();
     }
 
     public Letter findOne(Long id) {
