@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,45 +22,24 @@ public class LetterService {
 
     public PostListResponse getLetterList(HttpSession session) {
 
-        System.out.println(session.toString());
-        System.out.println(session.getId());
-        System.out.println(session.getAttributeNames());
-
-        // for test response
-        ArrayList<Letter> letterList = new ArrayList<>();
-        letterList.add(new Letter());
-        letterList.add(new Letter());
-        String email;
-        email = (String)session.getAttribute("userEmail");
-        //
-
-        System.out.println("email: " + email);
-
-        return new PostListResponse(email, letterList);
+        Member member = memberRepository.findOne((Long) session.getAttribute("userId"));
+        List<Letter> letterList = letterRepository.getLetterList(member.getId());
+        return new PostListResponse(member.getEmail(), letterList);
     }
 
-    public Long createLetter(Letter letter, HttpSession session) {
+    public void createLetter(Letter letter, HttpSession session) {
 
         String accessToken = (String)session.getAttribute("accessToken");
-        String email = (String)session.getAttribute("userEmail");
+        Long userId = (Long) session.getAttribute("userId");
 
         if (accessToken != null) {
-            Member member = memberRepository.findByEmail(email).get(0);
-
+            Member member = memberRepository.findOne(userId);
             letter.setMember(member);
-
-            return letterRepository.save(letter);
-
-        } else {
-            return null;
+            letterRepository.save(letter);
         }
     }
 
     public Letter readLetter(Long letterId) {
         return letterRepository.findOne(letterId);
-    }
-
-    public List<Letter> getLetterList(Long memberId)  {
-        return letterRepository.getLetterList(memberId);
     }
 }

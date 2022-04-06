@@ -5,15 +5,16 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString
 public class PostListResponse {
-    public PostListResponse(String email, ArrayList<Letter> letterList) {
+    public PostListResponse(String email, List<Letter> letterList) {
         this.email = email;
         this.letterList = letterList;
     }
 
     private String email;
-    private ArrayList<Letter> letterList;
+    private List<Letter> letterList;
 }
