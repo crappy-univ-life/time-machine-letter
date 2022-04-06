@@ -44,7 +44,6 @@ public class LetterRepositoryTest {
         letterRepository.save(letter);
 
         //then
-        System.out.println("%%%here :" + letterRepository.findOne(2L));
         assertEquals(letter, letterRepository.findOne(2L));
     }
 }
