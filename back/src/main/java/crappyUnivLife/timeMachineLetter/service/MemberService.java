@@ -22,17 +22,10 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final LetterService letterService;
     private final KakaoOAuth2 kakaoOAuth2;
 
     public PostListResponse kakaoLogin(String authorizedCode, HttpSession session) {
-
-        // for test response
-        ArrayList<Letter> letterList = new ArrayList<>();
-        letterList.add(new Letter());
-        letterList.add(new Letter());
-        PostListResponse postListResponse = new PostListResponse("woojin8787", letterList);
-        //
-
         String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
@@ -48,7 +41,8 @@ public class MemberService {
         session.setAttribute("userEmail", member.getEmail());
         session.setAttribute("accessToken", accessToken);
 
-        return postListResponse;
+
+        return letterService.getLetterList(session);
     }
 
     public void kakaoLogout(HttpSession session) {
