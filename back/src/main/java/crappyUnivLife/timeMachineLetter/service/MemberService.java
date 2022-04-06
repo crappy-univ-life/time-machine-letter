@@ -35,6 +35,7 @@ public class MemberService {
             memberRepository.save(member);
         } else {
             System.out.println("기존 맴버 로그인 : " + member.getEmail());
+            member = memberRepository.findOne((Long) session.getAttribute("userId"));
         }
 
         session.setAttribute("userId", member.getId());
