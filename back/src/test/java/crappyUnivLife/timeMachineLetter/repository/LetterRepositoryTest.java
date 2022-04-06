@@ -35,7 +35,7 @@ public class LetterRepositoryTest {
 
         Letter letter = new Letter();
 //        letter.setId(100L);
-        letter.setLetterPassword("1234");
+        letter.setPassword("1234");
         letter.setTitle("제목");
         letter.setContent("내용");
         letter.setMember(member);

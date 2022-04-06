@@ -15,9 +15,8 @@ public class LetterRepository {
     @PersistenceContext
     private final EntityManager em;
 
-    public Long save(Letter letter) {
+    public void save(Letter letter) {
         em.persist(letter);
-        return letter.getId();
     }
 
     public Letter findOne(Long id) {

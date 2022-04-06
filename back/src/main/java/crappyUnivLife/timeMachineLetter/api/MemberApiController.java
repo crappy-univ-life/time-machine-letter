@@ -29,9 +29,8 @@ public class MemberApiController {
     }
 
     @PostMapping("/user/logout")
-    public String logoutRequest(HttpSession session) {
-        return memberService.kakaoLogout(session);
-        // return email when sccess
+    public void logoutRequest(HttpSession session) {
+        memberService.kakaoLogout(session);
     }
 
     @GetMapping("/letter")
@@ -40,7 +39,7 @@ public class MemberApiController {
     }
 
     @PostMapping("/letter")
-    public Long letterWriteRequest(@RequestBody Letter letter, HttpSession session) {
-        return letterService.createLetter(letter, session);
+    public void letterWriteRequest(@RequestBody Letter letter, HttpSession session) {
+        letterService.createLetter(letter, session);
     }
 }

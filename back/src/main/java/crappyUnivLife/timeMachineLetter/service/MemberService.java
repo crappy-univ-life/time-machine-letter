@@ -40,26 +40,25 @@ public class MemberService {
         if (isNewMember(member)) {
             System.out.println("새로운 맴버 가입 : " + member.getEmail());
             memberRepository.save(member);
+        } else {
+            System.out.println("기존 맴버 로그인 : " + member.getEmail());
         }
 
+        session.setAttribute("userId", member.getId());
         session.setAttribute("userEmail", member.getEmail());
         session.setAttribute("accessToken", accessToken);
 
         return postListResponse;
     }
 
-    public String kakaoLogout(HttpSession session) {
+    public void kakaoLogout(HttpSession session) {
 
         String accessToken = (String)session.getAttribute("accessToken");
-        String email = (String)session.getAttribute("userEmail");
 
         if (accessToken != null) {
             kakaoOAuth2.kakaoLogout(accessToken);
             session.removeAttribute("access_Token");
             session.removeAttribute("userEmail");
-            return email;
-        } else {
-            return null;
         }
     }
 
