@@ -6,6 +6,7 @@ import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.LetterRepository;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LetterService {
 
+
     private final MemberRepository memberRepository;
     private final LetterRepository letterRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public PostListResponse getLetterList(HttpSession session) {
 
@@ -28,6 +31,8 @@ public class LetterService {
     }
 
     public void createLetter(Letter letter, HttpSession session) {
+
+        letter.setPassword(passwordEncoder.encode(letter.getPassword()));
 
         String accessToken = (String)session.getAttribute("accessToken");
         Long userId = (Long) session.getAttribute("userId");
