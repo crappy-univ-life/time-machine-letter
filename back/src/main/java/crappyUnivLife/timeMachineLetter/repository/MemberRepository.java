@@ -19,9 +19,9 @@ public class MemberRepository {
         em.persist(member);
     }
 
-//    public Member findOne(Long id) {
-//        return em.find(Member.class, id);
-//    }
+    public Member findOne(Long id) {
+        return em.find(Member.class, id);
+    }
 
     public List<Member> findByEmail(String email) {
         return em.createQuery("select m from Member m where m.email = :email", Member.class)

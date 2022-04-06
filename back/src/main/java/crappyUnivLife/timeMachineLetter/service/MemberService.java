@@ -22,17 +22,10 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final LetterService letterService;
     private final KakaoOAuth2 kakaoOAuth2;
 
     public PostListResponse kakaoLogin(String authorizedCode, HttpSession session) {
-
-        // for test response
-        ArrayList<Letter> letterList = new ArrayList<>();
-        letterList.add(new Letter());
-        letterList.add(new Letter());
-        PostListResponse postListResponse = new PostListResponse("woojin8787", letterList);
-        //
-
         String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
@@ -40,26 +33,26 @@ public class MemberService {
         if (isNewMember(member)) {
             System.out.println("새로운 맴버 가입 : " + member.getEmail());
             memberRepository.save(member);
+        } else {
+            System.out.println("기존 맴버 로그인 : " + member.getEmail());
         }
 
+        session.setAttribute("userId", member.getId());
         session.setAttribute("userEmail", member.getEmail());
         session.setAttribute("accessToken", accessToken);
 
-        return postListResponse;
+
+        return letterService.getLetterList(session);
     }
 
-    public String kakaoLogout(HttpSession session) {
+    public void kakaoLogout(HttpSession session) {
 
         String accessToken = (String)session.getAttribute("accessToken");
-        String email = (String)session.getAttribute("userEmail");
 
         if (accessToken != null) {
             kakaoOAuth2.kakaoLogout(accessToken);
             session.removeAttribute("access_Token");
             session.removeAttribute("userEmail");
-            return email;
-        } else {
-            return null;
         }
     }
 
