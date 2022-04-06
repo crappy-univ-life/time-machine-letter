@@ -24,8 +24,14 @@ public class LetterRepository {
     }
 
     public List<Letter> getLetterList(Long memberId) {
-        return em.createQuery("select l from Letter l where l.member.Id = :memberId", Letter.class)
+        return em.createQuery("select l.hash, l.createAt, l.openAt, l.title from Letter l where l.member.Id = :memberId", Letter.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
+    }
+
+    public Letter findByHash(String hash) {
+        return em.createQuery("select l, m.email from Letter l, Member m where l.hash =:hash", Letter.class)
+                .setParameter("hash", hash)
+                .getSingleResult();
     }
 }

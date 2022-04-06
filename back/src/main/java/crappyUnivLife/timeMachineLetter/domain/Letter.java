@@ -14,6 +14,10 @@ public class Letter {
     @Column(name = "letter_id")
     private Long id;
 
+    private String hash;
+
+    private Boolean readable;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

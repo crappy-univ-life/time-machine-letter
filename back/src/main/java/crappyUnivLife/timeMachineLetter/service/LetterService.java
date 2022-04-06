@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,7 +45,21 @@ public class LetterService {
         }
     }
 
-    public Letter readLetter(Long letterId) {
-        return letterRepository.findOne(letterId);
+    public Letter readLetter(String hash, HttpSession session) {
+        Letter letter = letterRepository.findByHash(hash);
+        letter.setPassword(null);
+        validateOpenAt(letter);
+        return letter;
+    }
+
+    private void validateOpenAt(Letter letter) {
+        Date now = new Date();
+        if (now.compareTo(letter.getOpenAt()) > 0) {
+            letter.setReadable(true);
+        } else {
+            letter.setReadable(false);
+            letter.setTitle(null);
+            letter.setContent(null);
+        }
     }
 }
