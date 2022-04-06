@@ -11,20 +11,27 @@ import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
-import LetterPreviewModal from '../components/LetterPreviewModal';
-import LetterDetail from '../components/LetterDetail';
+import { useLogoutMutation } from '../service/login';
 
 const { TabPane } = Tabs;
 
 function Main() {
-  const user = useSelector((state) => state.auth.email);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate('/login');
-  //   }
-  // }, [user]);
+  const user = useSelector((state) => state.auth.email);
+  const [logout, result] = useLogoutMutation();
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user]);
+
+  if (result.error) {
+    alert('로그아웃 실패');
+  }
+  if (result.isSuccess) {
+    navigate('/login');
+  }
   return (
     <>
       <Row className={style.header} align="center">
@@ -37,7 +44,7 @@ function Main() {
           />
         </Col>
         <Col style={{ marginTop: '30px' }}>
-          <LoginOutlined className={style.LoginOutlined} />
+          <LoginOutlined className={style.LoginOutlined} onClick={() => { logout(); }} />
         </Col>
       </Row>
       <Row className={style.content}>
