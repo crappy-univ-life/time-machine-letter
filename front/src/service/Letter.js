@@ -11,9 +11,14 @@ export const LetterApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getSingleLetter: builder.query({
+    getLetterList: builder.query({
       query: () => ({
         url: '/',
+      }),
+    }),
+    getSingleLetter: builder.query({
+      query: () => ({
+        url: '/{hash}',
       }),
     }),
     postLetter: builder.mutation({
@@ -41,4 +46,10 @@ export const LetterApi = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetSingleLetterQuery, usePostLetterMutation, useDeleteLetterMutation, useUpdateLetterMutation } = LetterApi;
+export const {
+  useGetSingleLetterQuery,
+  useGetLetterListQuery,
+  usePostLetterMutation,
+  useDeleteLetterMutation,
+  useUpdateLetterMutation,
+} = LetterApi;

@@ -7,7 +7,7 @@ import { openDetailModal } from '../store/global';
 import LetterDetail from './LetterDetail';
 
 function LetterList({ openLetter, closeLetter, allLetter }) {
-  const letterList = useSelector((state) => state.letter.letters);
+  const letterList = useSelector((state) => state.letter.letterList);
   const today = new Date();
   console.log(today);
   let showList;

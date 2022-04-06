@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LetterApi } from '../service/Letter';
+import { LoginApi } from '../service/login';
 
 const dummyState = {
   email: null,
@@ -13,7 +14,7 @@ const dummyState = {
     from: '개발자',
     to: '뭐',
   },
-  letters: [{
+  letterList: [{
     id: 3,
     createAt: '2019-03-28',
     openAt: JSON.stringify(new Date('2022-04-04T23:50:00')),
@@ -62,6 +63,9 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(LetterApi.endpoints.getSingleLetter.matchFulfilled, (state, action) => {
       state.singleLetter = action.payload.result;
+    });
+    builder.addMatcher(LoginApi.endpoints.login.matchFulfilled, (state, action) => {
+      state.letterList = action.payload.letterList;
     });
   },
 });
