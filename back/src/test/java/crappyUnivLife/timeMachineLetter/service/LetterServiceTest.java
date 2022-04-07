@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback(false) //직접 데이터 보고싶을때
+//@Rollback(false) //직접 데이터 보고싶을때
 class LetterServiceTest {
     @Autowired MemberRepository memberRepository;
     @Autowired LetterService letterService;
@@ -34,14 +34,18 @@ class LetterServiceTest {
         memberRepository.save(member);
         session.setAttribute("userId", member.getId());
         session.setAttribute("accessToken", "testToken");
+
         Letter letter = new Letter();
         letter.setTitle("test title");
         letter.setContent("test content");
+        letter.setPassword("1234");
         letter.setMember(member);
         letterService.createLetter(letter, session);
+
         Letter letter2 = new Letter();
         letter2.setTitle("test2 title");
         letter2.setContent("test2 content");
+        letter2.setPassword("1234");
         letter2.setMember(member);
         letterService.createLetter(letter2, session);
 
@@ -50,5 +54,10 @@ class LetterServiceTest {
 
         Assertions.assertEquals(postListResponse.getEmail(), member.getEmail());
         Assertions.assertEquals(postListResponse.getLetterList().size(), 2);
+    }
+
+    @Test
+    public void 해시함수_테스트() {
+        Assertions.assertEquals(letterService.HASH256("123"), letterService.HASH256("123"));
     }
 }
