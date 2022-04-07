@@ -2,6 +2,7 @@ package crappyUnivLife.timeMachineLetter.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Letter {
     @Id @GeneratedValue
     @Column(name = "letter_id")
