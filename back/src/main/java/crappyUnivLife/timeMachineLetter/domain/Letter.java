@@ -2,6 +2,7 @@ package crappyUnivLife.timeMachineLetter.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,10 +10,15 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Letter {
     @Id @GeneratedValue
     @Column(name = "letter_id")
     private Long id;
+
+    private String hash;
+
+    private Boolean readable;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -25,6 +31,10 @@ public class Letter {
     private String title;
 
     private String content;
+
+    private String letterFrom;
+
+    private String letterTo;
 
     private Long view_count;
 

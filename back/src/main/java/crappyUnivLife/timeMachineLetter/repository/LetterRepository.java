@@ -28,4 +28,10 @@ public class LetterRepository {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+    public Letter findByHash(String hash) {
+        return em.createQuery("select l from Letter l where l.hash =:hash", Letter.class)
+                .setParameter("hash", hash)
+                .getSingleResult();
+    }
 }

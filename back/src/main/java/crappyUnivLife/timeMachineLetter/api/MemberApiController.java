@@ -7,10 +7,7 @@ import crappyUnivLife.timeMachineLetter.service.LetterService;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -34,12 +31,17 @@ public class MemberApiController {
     }
 
     @GetMapping("/letter")
-    public PostListResponse postListRequest(HttpSession session) {
+    public PostListResponse letterListRequest(HttpSession session) {
         return letterService.getLetterList(session);
     }
 
     @PostMapping("/letter")
     public void letterWriteRequest(@RequestBody Letter letter, HttpSession session) {
         letterService.createLetter(letter, session);
+    }
+
+    @GetMapping("/letter/{hash}")
+    public Letter postReadRequest(@PathVariable(value="hash") String hash) {
+        return letterService.readLetter(hash);
     }
 }
