@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class LetterService {
             Member member = memberRepository.findOne(userId);
             letter.setMember(member);
             letterRepository.save(letter);
+            letter.setHash(HASH256(letter.getId().toString()));
         }
     }
 
@@ -61,5 +65,25 @@ public class LetterService {
             letter.setTitle(null);
             letter.setContent(null);
         }
+    }
+
+    protected String HASH256(String id) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(id.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            //출력
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
