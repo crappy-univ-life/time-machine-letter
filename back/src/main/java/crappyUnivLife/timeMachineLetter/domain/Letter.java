@@ -30,6 +30,10 @@ public class Letter {
 
     private String content;
 
+    private String letterFrom;
+
+    private String letterTo;
+
     private Long view_count;
 
     private Date createAt;
