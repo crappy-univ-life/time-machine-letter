@@ -25,13 +25,15 @@ function Main() {
       navigate('/login');
     }
   }, [user]);
+  useEffect(() => {
+    if (result.error) {
+      alert('로그아웃 실패');
+    }
+    if (result.isSuccess) {
+      navigate('/login');
+    }
+  }, [result]);
 
-  if (result.error) {
-    alert('로그아웃 실패');
-  }
-  if (result.isSuccess) {
-    navigate('/login');
-  }
   return (
     <>
       <Row className={style.header} align="center">

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Button, Input, Checkbox, Col, Row, DatePicker, TimePicker, Form } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,9 +27,18 @@ function WriteLetter({ defaultValue = null }) {
   const formRef = useRef();
   const onSubmit = (data) => {
     const sendData = convertSendDate(data);
-    console.log(sendData);
-    // data fetch API
+    postLetter(sendData);
   };
+  useEffect(() => {
+    if (result.isSuccess) {
+      alert('메세지 보내기 성공');
+      reset();
+      dispatch(closeWriteModal());
+    } else if (result.isError) {
+      alert(result.error);
+    }
+  }, [result]);
+
   return (
 
     <Modal

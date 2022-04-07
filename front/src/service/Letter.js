@@ -10,16 +10,13 @@ export const LetterApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Post'],
   endpoints: (builder) => ({
     getLetterList: builder.query({
       query: () => ({
         url: '/',
       }),
-    }),
-    getSingleLetter: builder.query({
-      query: () => ({
-        url: '/{hash}',
-      }),
+      providesTags: ['Post'],
     }),
     postLetter: builder.mutation({
       query: (code) => ({
@@ -27,19 +24,27 @@ export const LetterApi = createApi({
         method: 'POST',
         body: code,
       }),
+      invalidatesTags: ['Post'],
     }),
-    deleteLetter: builder.mutation({
-      query: () => ({
-        url: '/',
-        method: 'DELETE',
+    getSingleLetter: builder.query({
+      query: (hash) => ({
+        url: `/${hash}`,
       }),
     }),
+    deleteLetter: builder.mutation({
+      query: (hash) => ({
+        url: `/${hash}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Post'],
+    }),
     updateLetter: builder.mutation({
-      query: (code) => ({
-        url: '/',
+      query: (code, hash) => ({
+        url: `/${hash}`,
         method: 'PUT',
         body: code,
       }),
+      invalidatesTags: ['Post'],
     }),
   }),
 });
