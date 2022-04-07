@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from '../css/Main.module.css';
 import img from '../img/bonfire.jpg';
 
-function Letter() {
-  const data = useSelector((state) => state.letter.singleLetter);
+function Letter({ data }) {
   return (
     <Row className={style.content} style={{ height: '100vh%' }}>
       <Col md={10} xs={23} align="center" className={style.backgroundImg}>
