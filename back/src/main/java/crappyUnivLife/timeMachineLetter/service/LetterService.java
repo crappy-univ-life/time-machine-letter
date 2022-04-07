@@ -49,7 +49,7 @@ public class LetterService {
         }
     }
 
-    public Letter readLetter(String hash, HttpSession session) {
+    public Letter readLetter(String hash) {
         Letter letter = letterRepository.findByHash(hash);
         letter.setPassword(null);
         validateOpenAt(letter);

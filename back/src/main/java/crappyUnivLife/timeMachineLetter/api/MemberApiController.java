@@ -41,7 +41,7 @@ public class MemberApiController {
     }
 
     @GetMapping("/letter/{hash}")
-    public Letter postReadRequest(@RequestParam String hash, HttpSession session) {
-        return letterService.readLetter(hash, session);
+    public Letter postReadRequest(@PathVariable(value="hash") String hash) {
+        return letterService.readLetter(hash);
     }
 }
