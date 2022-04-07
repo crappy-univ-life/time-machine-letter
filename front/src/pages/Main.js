@@ -12,19 +12,20 @@ import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
 import { useLogoutMutation } from '../service/login';
+import { useGetLetterListQuery } from '../service/Letter';
 
 const { TabPane } = Tabs;
 
 function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.email);
   const [logout, result] = useLogoutMutation();
+  const { isError } = useGetLetterListQuery();
   useEffect(() => {
-    if (!user) {
+    if (isError) {
       navigate('/login');
     }
-  }, [user]);
+  }, [isError]);
   useEffect(() => {
     if (result.error) {
       alert('로그아웃 실패');
