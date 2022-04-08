@@ -7,10 +7,9 @@ import { openDetailModal } from '../store/global';
 import LetterDetail from './LetterDetail';
 
 function LetterList({ openLetter, closeLetter, allLetter }) {
-  const letterList = useSelector((state) => state.letter.letters);
+  const letterList = useSelector((state) => state.letter.letterList);
   const today = new Date();
-  console.log(today);
-  let showList;
+  let showList = [];
   const dispatch = useDispatch();
   if (openLetter) {
     showList = letterList.filter((letter) => new Date(JSON.parse(letter.openAt)) < today);
@@ -19,7 +18,6 @@ function LetterList({ openLetter, closeLetter, allLetter }) {
   } else if (allLetter) {
     showList = letterList;
   }
-  console.log(showList);
   return (
     <Row gutter={[20, 20]} align="center" sm={12}>
       {showList.map((letter) => (

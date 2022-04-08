@@ -4,25 +4,25 @@ import { Popover, Spin } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { LoginApi, useGetUserTokenMutation } from '../service/login';
-import { setCredentials } from '../store/auth';
+import { LoginApi, useLoginMutation } from '../service/login';
 
 function KakaoHandler() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const accessCode = new URL(window.location.href).searchParams.get('code');
-  const [getUserToken, result] = useGetUserTokenMutation();
+  const [getUserToken, result] = useLoginMutation();
   const Login = async () => {
-    const token = await getUserToken(accessCode).unwrap();
-    dispatch(setCredentials(token));
-    navigate('/');
+    await getUserToken(accessCode);
   };
   useEffect(() => {
     Login();
   }, []);
   if (result.error) {
     alert('로그인 실패');
+    navigate('/login');
+  }
+  if (result.isSuccess) {
     navigate('/');
   }
   return (

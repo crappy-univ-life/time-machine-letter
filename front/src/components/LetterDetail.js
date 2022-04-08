@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import { useDeleteLetterMutation, useGetSingleLetterQuery } from '../service/Letter';
-import { closeDetailModal, openPreviewModal } from '../store/global';
+import { closeDetailModal, openPreviewModal, openWriteModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
 import LetterView from './LetterView';
 import WriteLetter from './WriteLetter';
@@ -59,28 +59,27 @@ function LetterModal({ modal, LetterHash }) {
         <Button type="info" onClick={() => dispatch(openPreviewModal())}>
           미리보기
         </Button>,
-        <Button type="success">
+        <Button type="success" onClick={() => dispatch(openWriteModal())}>
           수정
         </Button>,
-        <WriteLetter defaultValue={data} />,
         <Button type="danger" onClick={() => letterDelete(LetterHash)}>
           삭제
         </Button>]}
     >
       <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
-        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : convertDeadLine(data.openAt)} />
+        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data.openAt && convertDeadLine(new Date(data.openAt))} />
         <hr />
         <div style={{ padding: '10px' }}>
-          <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data.title}</h1>
+          <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data?.title}</h1>
         </div>
         <div style={{ padding: '10px' }}>
-          <p>{isLoading ? <Skeleton.Button active shape="round" /> : data.content }</p>
+          <p>{isLoading ? <Skeleton.Button active shape="round" /> : data?.content }</p>
         </div>
       </div>
       <hr />
       <div style={{ textAlign: 'end' }}>
-        <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.from }</p>
-        <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.to }</p>
+        <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data?.letterFrom }</p>
+        <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data?.letterTo }</p>
       </div>
     </Modal>
   );

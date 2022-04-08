@@ -10,11 +10,13 @@ export const LetterApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Post'],
   endpoints: (builder) => ({
-    getSingleLetter: builder.query({
+    getLetterList: builder.query({
       query: () => ({
         url: '/',
       }),
+      providesTags: ['Post'],
     }),
     postLetter: builder.mutation({
       query: (code) => ({
@@ -22,23 +24,37 @@ export const LetterApi = createApi({
         method: 'POST',
         body: code,
       }),
+      invalidatesTags: ['Post'],
     }),
-    deleteLetter: builder.mutation({
-      query: () => ({
-        url: '/',
-        method: 'DELETE',
+    getSingleLetter: builder.query({
+      query: (hash) => ({
+        url: `/${hash}`,
       }),
     }),
+    deleteLetter: builder.mutation({
+      query: (hash) => ({
+        url: `/${hash}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Post'],
+    }),
     updateLetter: builder.mutation({
-      query: (code) => ({
-        url: '/',
+      query: (code, hash) => ({
+        url: `/${hash}`,
         method: 'PUT',
         body: code,
       }),
+      invalidatesTags: ['Post'],
     }),
   }),
 });
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetSingleLetterQuery, usePostLetterMutation, useDeleteLetterMutation, useUpdateLetterMutation } = LetterApi;
+export const {
+  useGetSingleLetterQuery,
+  useGetLetterListQuery,
+  usePostLetterMutation,
+  useDeleteLetterMutation,
+  useUpdateLetterMutation,
+} = LetterApi;
