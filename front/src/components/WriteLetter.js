@@ -68,7 +68,7 @@ function WriteLetter() {
                 <DatePicker
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
+                  value={value}
                 />
               )}
             />
@@ -79,7 +79,7 @@ function WriteLetter() {
                 <TimePicker
                   onChange={onChange}
                   onBlur={onBlur}
-                  selected={value}
+                  value={value}
                 />
               )}
             />
@@ -88,40 +88,40 @@ function WriteLetter() {
         <Controller
           control={control}
           name="letterFrom"
-          render={({ field: { onChange, onBlur } }) => (
-            <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
         <hr />
         <Controller
           control={control}
           name="password"
-          render={({ field: { onChange, onBlur } }) => (
-            <Input.Password placeholder=" password" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input.Password placeholder=" password" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
         <hr />
         <Controller
           control={control}
           name="title"
-          render={({ field: { onChange, onBlur } }) => (
-            <Input placeholder="편지 제목" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input placeholder="편지 제목" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
         <hr />
         <Controller
           control={control}
           name="content"
-          render={({ field: { onChange, onBlur } }) => (
-            <TextArea rows={8} placeholder="편지 본문" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextArea rows={8} placeholder="편지 본문" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
         <hr />
         <Controller
           control={control}
           name="letterTo"
-          render={({ field: { onChange, onBlur } }) => (
-            <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} />
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
         <hr />
