@@ -37,11 +37,18 @@ const dummyQuery = () => {
 
 const convertDeadLine = (date) => date.getTime();
 
-function LetterModal({ modal, LetterHash }) {
+function LetterDetail() {
+  const modal = useSelector((state) => state.global.detailModal);
+  const LetterHash = useSelector((state) => state.global.LetterHash);
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetSingleLetterQuery(LetterHash);
+  const { data, isLoading, refetch } = useGetSingleLetterQuery(LetterHash);
   // const { isLoading, data } = dummyQuery();
   const [letterDelete, result] = useDeleteLetterMutation();
+  useEffect(() => {
+    if (modal) {
+      refetch();
+    }
+  }, [modal]);
   useEffect(() => {
     if (result.isSuccess) {
       alert('삭제되었습니다');
@@ -67,7 +74,7 @@ function LetterModal({ modal, LetterHash }) {
         </Button>]}
     >
       <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
-        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data.openAt && convertDeadLine(new Date(data.openAt))} />
+        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && convertDeadLine(new Date(data.openAt))} />
         <hr />
         <div style={{ padding: '10px' }}>
           <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data?.title}</h1>
@@ -82,16 +89,6 @@ function LetterModal({ modal, LetterHash }) {
         <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data?.letterTo }</p>
       </div>
     </Modal>
-  );
-}
-
-function LetterDetail() {
-  const detailModal = useSelector((state) => state.global.detailModal);
-  const LetterHash = useSelector((state) => state.global.LetterHash);
-  return (
-    <>
-      {detailModal && <LetterModal modal={detailModal} LetterHash={LetterHash} />}
-    </>
   );
 }
 

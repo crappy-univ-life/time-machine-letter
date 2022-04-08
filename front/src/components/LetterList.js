@@ -12,9 +12,9 @@ function LetterList({ openLetter, closeLetter, allLetter }) {
   let showList = [];
   const dispatch = useDispatch();
   if (openLetter) {
-    showList = letterList.filter((letter) => new Date(JSON.parse(letter.openAt)) < today);
+    showList = letterList.filter((letter) => new Date(letter.openAt) < today);
   } else if (closeLetter) {
-    showList = letterList.filter((letter) => new Date(JSON.parse(letter.openAt)) > today);
+    showList = letterList.filter((letter) => new Date(letter.openAt) > today);
   } else if (allLetter) {
     showList = letterList;
   }

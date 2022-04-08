@@ -23,12 +23,12 @@ function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logout, result] = useLogoutMutation();
-  const { isError } = useGetLetterListQuery();
+  const { data, isSuccess } = useGetLetterListQuery();
   useEffect(() => {
-    if (isError) {
+    if (data == null && isSuccess) {
       navigate('/login');
     }
-  }, [isError]);
+  }, [data, isSuccess]);
   useEffect(() => {
     if (result.error) {
       alert('로그아웃 실패');
@@ -59,6 +59,7 @@ function Main() {
       </Row>
       <Row className={style.content}>
         <Col md={12}>
+          {data && (
           <Tabs defaultActiveKey="1" style={{ padding: '10px' }}>
             <TabPane tab="전체 편지" key="1">
               <LetterList allLetter />
@@ -70,6 +71,7 @@ function Main() {
               <LetterList openLetter />
             </TabPane>
           </Tabs>
+          )}
           <Row className={style.content}>
             <Col>
               <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={() => dispatch(openWriteModal())} />
