@@ -21,16 +21,13 @@ function LetterList({ openLetter, closeLetter, allLetter }) {
   }
   console.log(showList);
   return (
-    <>
-      <Row gutter={[20, 20]} align="center" sm={12}>
-        {showList.map((letter) => (
-          <Col lg={12} xs={22}>
-            <Card bordered={false} hoverable className={style.card} onClick={() => dispatch(openDetailModal())}><Meta title={letter.createAt} description={letter.title} /></Card>
-          </Col>
-        ))}
-      </Row>
-      <LetterDetail />
-    </>
+    <Row gutter={[20, 20]} align="center" sm={12}>
+      {showList.map((letter) => (
+        <Col lg={12} xs={22}>
+          <Card bordered={false} hoverable className={style.card} onClick={() => dispatch(openDetailModal(letter.hash))}><Meta title={letter.createAt} description={letter.title} /></Card>
+        </Col>
+      ))}
+    </Row>
 
   );
 }

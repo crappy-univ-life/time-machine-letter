@@ -11,6 +11,8 @@ import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
+import LetterPreviewModal from '../components/LetterPreviewModal';
+import LetterDetail from '../components/LetterDetail';
 
 const { TabPane } = Tabs;
 
@@ -54,7 +56,9 @@ function Main() {
           <Row className={style.content}>
             <Col>
               <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={() => dispatch(openWriteModal())} />
+              <LetterPreviewModal />
               <WriteLetter />
+              <LetterDetail />
             </Col>
           </Row>
         </Col>

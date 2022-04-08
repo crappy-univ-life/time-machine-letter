@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
-import { useGetSingleLetterQuery } from '../service/Letter';
+import { useDeleteLetterMutation, useGetSingleLetterQuery } from '../service/Letter';
 import { closeDetailModal, openPreviewModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
 import LetterView from './LetterView';
+import WriteLetter from './WriteLetter';
 
 const dummyQuery = () => {
   const date = new Date('2022-04-04T23:50:00');
@@ -36,54 +37,61 @@ const dummyQuery = () => {
 
 const convertDeadLine = (date) => date.getTime();
 
-function LetterModal({ modal }) {
+function LetterModal({ modal, LetterHash }) {
   const dispatch = useDispatch();
-  // const { data } = useGetSingleLetterQuery();
-  const { isLoading, data } = dummyQuery();
+  const { data, isLoading } = useGetSingleLetterQuery(LetterHash);
+  // const { isLoading, data } = dummyQuery();
+  const [letterDelete, result] = useDeleteLetterMutation();
+  useEffect(() => {
+    if (result.isSuccess) {
+      alert('삭제되었습니다');
+      dispatch(closeDetailModal());
+    } else if (result.isError) {
+      alert('삭제에 실패하였습니다');
+    }
+  }, [result]);
   return (
-    <>
-      <Modal
-        title="2022-03-18"
-        visible={modal}
-        onCancel={() => dispatch(closeDetailModal())}
-        footer={[
-          <Button type="info" onClick={() => dispatch(openPreviewModal())}>
-            미리보기
-          </Button>,
-          <Button type="success">
-            수정
-          </Button>,
-          <Button type="danger">
-            삭제
-          </Button>]}
-      >
-        <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
-          <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : convertDeadLine(data.openAt)} />
-          <hr />
-          <div style={{ padding: '10px' }}>
-            <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data.title}</h1>
-          </div>
-          <div style={{ padding: '10px' }}>
-            <p>{isLoading ? <Skeleton.Button active shape="round" /> : data.content }</p>
-          </div>
-        </div>
+    <Modal
+      title="2022-03-18"
+      visible={modal}
+      onCancel={() => dispatch(closeDetailModal())}
+      footer={[
+        <Button type="info" onClick={() => dispatch(openPreviewModal())}>
+          미리보기
+        </Button>,
+        <Button type="success">
+          수정
+        </Button>,
+        <WriteLetter defaultValue={data} />,
+        <Button type="danger" onClick={() => letterDelete(LetterHash)}>
+          삭제
+        </Button>]}
+    >
+      <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
+        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : convertDeadLine(data.openAt)} />
         <hr />
-        <div style={{ textAlign: 'end' }}>
-          <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.from }</p>
-          <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.to }</p>
+        <div style={{ padding: '10px' }}>
+          <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data.title}</h1>
         </div>
-      </Modal>
-      <LetterPreviewModal />
-    </>
-
+        <div style={{ padding: '10px' }}>
+          <p>{isLoading ? <Skeleton.Button active shape="round" /> : data.content }</p>
+        </div>
+      </div>
+      <hr />
+      <div style={{ textAlign: 'end' }}>
+        <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.from }</p>
+        <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data.to }</p>
+      </div>
+    </Modal>
   );
 }
 
 function LetterDetail() {
   const detailModal = useSelector((state) => state.global.detailModal);
+  const LetterHash = useSelector((state) => state.global.LetterHash);
   return (
     <>
-      {detailModal && <LetterModal modal={detailModal} />}
+      {detailModal && <LetterModal modal={detailModal} LetterHash={LetterHash} />}
     </>
   );
 }

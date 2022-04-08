@@ -2,12 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'global',
-  initialState: { detailModal: false, previewModal: false, writeModal: false },
+  initialState: { detailModal: false, previewModal: false, writeModal: false, LetterHash: null },
   reducers: {
-    openDetailModal: (
-      state,
-    ) => {
+    openDetailModal: (state, action) => {
       state.detailModal = true;
+      state.LetterHash = action.payload;
     },
     closeDetailModal: (
       state,
