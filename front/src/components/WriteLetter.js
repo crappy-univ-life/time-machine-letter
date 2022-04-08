@@ -19,10 +19,10 @@ const convertSendDate = (data) => {
   return sendData;
 };
 
-function WriteLetter() {
+function WriteLetter({ defaultValue = null }) {
   const modalVisible = useSelector((state) => state.global.writeModal);
   const dispatch = useDispatch();
-  const { handleSubmit, control, getValues } = useForm();
+  const { handleSubmit, control, getValues, reset } = useForm({ defaultValues: defaultValue });
   const [postLetter, result] = usePostLetterMutation();
   const formRef = useRef();
   const onSubmit = (data) => {

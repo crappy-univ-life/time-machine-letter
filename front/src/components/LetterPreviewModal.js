@@ -16,6 +16,7 @@ function LetterPreviewModal() {
         margin: 0,
         top: 0,
         maxWidth: 'unset',
+        zIndex: 1050,
       }}
       visible={previewModalVisible}
       onCancel={() => dispatch(closePreviewModal())}
