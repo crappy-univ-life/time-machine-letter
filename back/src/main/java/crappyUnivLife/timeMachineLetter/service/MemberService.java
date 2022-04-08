@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,12 +31,15 @@ public class MemberService {
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
         //기존에 없던 회원이면 회원가입 - DB에 저장
-        if (isNewMember(member)) {
-            System.out.println("새로운 맴버 가입 : " + member.getEmail());
+
+        Optional<Member> currentMember = memberRepository.findByEmail(member.getEmail());
+
+        if (currentMember.isEmpty()) {
             memberRepository.save(member);
+            System.out.println("새로운 맴버 가입 : " + member.getEmail());
         } else {
+            member = currentMember.get();
             System.out.println("기존 맴버 로그인 : " + member.getEmail());
-            member = memberRepository.findOne((Long) session.getAttribute("userId"));
         }
 
         session.setAttribute("userId", member.getId());
@@ -52,15 +56,10 @@ public class MemberService {
 
         if (accessToken != null) {
             kakaoOAuth2.kakaoLogout(accessToken);
-            session.removeAttribute("access_Token");
-            session.removeAttribute("userEmail");
+            session.invalidate();
+        } else {
+            System.out.println("로그아웃 실패");
         }
-    }
-
-    private boolean isNewMember(Member member) {
-
-        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
-        return findMembers.isEmpty();
     }
 
 }
