@@ -1,5 +1,6 @@
 package crappyUnivLife.timeMachineLetter.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class Letter {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     private String password;
