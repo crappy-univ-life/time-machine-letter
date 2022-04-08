@@ -24,7 +24,7 @@ public class LetterRepository {
     }
 
     public List<Letter> getLetterList(Long memberId) {
-        return em.createQuery("select l from Letter l where l.member.Id = :memberId", Letter.class)
+        return em.createQuery("select l from Letter l join fetch l.member m where m.Id = :memberId", Letter.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
