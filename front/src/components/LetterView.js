@@ -16,14 +16,14 @@ function Letter({ data }) {
             </div>
             <hr />
             <div style={{ textAlign: 'right', padding: '10px' }}>
-              <p>{data.from}</p>
+              <p>{data.letterFrom}</p>
             </div>
             <br />
             <div>
               <p>{data.content}</p>
             </div>
             <br />
-            <h1>{data.to}</h1>
+            <h1>{data.letterTo}</h1>
           </Col>
         </Row>
       </Col>

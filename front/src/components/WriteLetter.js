@@ -12,22 +12,23 @@ const { TextArea } = Input;
 const convertSendDate = (data) => {
   const date = new Date(data.antdDatePicker);
   const time = new Date(data.antdTimePicker);
-  const fullDate = JSON.stringify(new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds()));
+  const openAt = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
   delete data.antdDatePicker;
   delete data.antdTimePicker;
-  const sendData = { ...data, fullDate };
+  const sendData = { ...data, openAt };
   return sendData;
 };
 
-function WriteLetter({ defaultValue = null }) {
+function WriteLetter() {
   const modalVisible = useSelector((state) => state.global.writeModal);
   const dispatch = useDispatch();
-  const { handleSubmit, control, getValues, reset } = useForm({ defaultValues: defaultValue });
+  const { handleSubmit, control, getValues, reset } = useForm();
   const [postLetter, result] = usePostLetterMutation();
   const formRef = useRef();
   const onSubmit = (data) => {
     const sendData = convertSendDate(data);
     postLetter(sendData);
+    console.log(sendData);
   };
   useEffect(() => {
     if (result.isSuccess) {
@@ -86,7 +87,7 @@ function WriteLetter({ defaultValue = null }) {
         </Row>
         <Controller
           control={control}
-          name="from"
+          name="letterFrom"
           render={({ field: { onChange, onBlur } }) => (
             <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} />
           )}
@@ -118,7 +119,7 @@ function WriteLetter({ defaultValue = null }) {
         <hr />
         <Controller
           control={control}
-          name="to"
+          name="letterTo"
           render={({ field: { onChange, onBlur } }) => (
             <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} />
           )}
