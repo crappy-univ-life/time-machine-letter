@@ -13,6 +13,9 @@ import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
 import { useLogoutMutation } from '../service/login';
 import { useGetLetterListQuery } from '../service/Letter';
+import LetterPreviewModal from '../components/LetterPreviewModal';
+import LetterDetail from '../components/LetterDetail';
+import LetterUpdate from '../components/LetterUpdate';
 
 const { TabPane } = Tabs;
 
@@ -38,6 +41,10 @@ function Main() {
   return (
     <>
       <Row className={style.header} align="center">
+        <LetterPreviewModal />
+        <WriteLetter />
+        <LetterUpdate />
+        <LetterDetail />
         <Col md={12} xs={20}>
           <Image
             width={80}
@@ -66,9 +73,6 @@ function Main() {
           <Row className={style.content}>
             <Col>
               <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={() => dispatch(openWriteModal())} />
-              <LetterPreviewModal />
-              <WriteLetter />
-              <LetterDetail />
             </Col>
           </Row>
         </Col>
