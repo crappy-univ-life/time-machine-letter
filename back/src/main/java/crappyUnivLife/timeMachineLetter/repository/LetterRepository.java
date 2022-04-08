@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,9 +30,10 @@ public class LetterRepository {
                 .getResultList();
     }
 
-    public Letter findByHash(String hash) {
-        return em.createQuery("select l from Letter l where l.hash =:hash", Letter.class)
+    public Optional<Letter> findByHash(String hash) {
+        List<Letter> letter = em.createQuery("select l from Letter l where l.hash =:hash", Letter.class)
                 .setParameter("hash", hash)
-                .getSingleResult();
+                .getResultList();
+        return letter.stream().findAny();
     }
 }

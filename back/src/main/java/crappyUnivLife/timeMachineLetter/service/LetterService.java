@@ -16,6 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -61,10 +62,15 @@ public class LetterService {
 
     @Transactional
     public Letter readLetter(String hash) {
-        Letter letter = letterRepository.findByHash(hash);
-        letter.setPassword(null);
-        validateOpenAt(letter);
-        return letter;
+        Optional<Letter> letter = letterRepository.findByHash(hash);
+        if(letter.isPresent()) {
+            letter.get().setPassword(null);
+            validateOpenAt(letter.get());
+            return letter.get();
+        } else {
+            System.out.println("유효하지 않은 편지" + hash);
+            return null;
+        }
     }
 
     private void validateOpenAt(Letter letter) {
