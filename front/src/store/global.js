@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'global',
-  initialState: { detailModal: false, previewModal: false, writeModal: false, LetterHash: null },
+  initialState: { detailModal: false, previewModal: false, writeModal: false, updateModal: false, LetterHash: null },
   reducers: {
     openDetailModal: (state, action) => {
       state.detailModal = true;
@@ -33,9 +33,19 @@ const slice = createSlice({
     ) => {
       state.writeModal = false;
     },
+    openUpdateModal: (
+      state,
+    ) => {
+      state.updateModal = true;
+    },
+    closeUpdateModal: (
+      state,
+    ) => {
+      state.updateModal = false;
+    },
   },
 });
 
-export const { openDetailModal, closeDetailModal, openPreviewModal, closePreviewModal, openWriteModal, closeWriteModal } = slice.actions;
+export const { openDetailModal, closeDetailModal, openPreviewModal, closePreviewModal, openWriteModal, closeWriteModal, openUpdateModal, closeUpdateModal } = slice.actions;
 
 export default slice.reducer;

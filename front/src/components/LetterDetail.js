@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
 import { useDeleteLetterMutation, useGetSingleLetterQuery } from '../service/Letter';
-import { closeDetailModal, openPreviewModal, openWriteModal } from '../store/global';
+import { closeDetailModal, openPreviewModal, openUpdateModal, openWriteModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
 import LetterView from './LetterView';
 import WriteLetter from './WriteLetter';
@@ -59,7 +59,7 @@ function LetterModal({ modal, LetterHash }) {
         <Button type="info" onClick={() => dispatch(openPreviewModal())}>
           미리보기
         </Button>,
-        <Button type="success" onClick={() => dispatch(openWriteModal())}>
+        <Button type="success" onClick={() => { dispatch(openUpdateModal()); dispatch(closeDetailModal()); }}>
           수정
         </Button>,
         <Button type="danger" onClick={() => letterDelete(LetterHash)}>
