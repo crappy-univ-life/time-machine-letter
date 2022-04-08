@@ -27,13 +27,23 @@ public class LetterService {
     private final LetterRepository letterRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional(readOnly = true)
     public PostListResponse getLetterList(HttpSession session) {
 
-        Member member = memberRepository.findOne((Long) session.getAttribute("userId"));
-        List<Letter> letterList = letterRepository.getLetterList(member.getId());
-        return new PostListResponse(member.getEmail(), letterList);
+        String accessToken = (String)session.getAttribute("accessToken");
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (accessToken != null) {
+            Member member = memberRepository.findOne(userId);
+            List<Letter> letterList = letterRepository.getLetterList(member.getId());
+            return new PostListResponse(member.getEmail(), letterList);
+        } else {
+            // 세션 유효하지 않음.
+            return new PostListResponse(null, null);
+        }
     }
 
+    @Transactional
     public void createLetter(Letter letter, HttpSession session) {
 
         letter.setPassword(passwordEncoder.encode(letter.getPassword()));
@@ -49,6 +59,7 @@ public class LetterService {
         }
     }
 
+    @Transactional
     public Letter readLetter(String hash) {
         Letter letter = letterRepository.findByHash(hash);
         letter.setPassword(null);
