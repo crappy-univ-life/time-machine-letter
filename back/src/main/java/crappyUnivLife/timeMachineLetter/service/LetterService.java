@@ -2,6 +2,7 @@ package crappyUnivLife.timeMachineLetter.service;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
 import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.LetterRepository;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
@@ -16,6 +17,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -28,7 +30,6 @@ public class LetterService {
     private final LetterRepository letterRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Transactional(readOnly = true)
     public PostListResponse getLetterList(HttpSession session) {
 
         String accessToken = (String)session.getAttribute("accessToken");
@@ -44,10 +45,12 @@ public class LetterService {
         }
     }
 
-    @Transactional
     public void createLetter(Letter letter, HttpSession session) {
 
-        letter.setPassword(passwordEncoder.encode(letter.getPassword()));
+        if(letter.getPassword() != null && !Objects.equals(letter.getPassword(), "")) {
+            letter.setPassword(passwordEncoder.encode(letter.getPassword()));
+            letter.setIsEncrypted(true);
+        }
 
         String accessToken = (String)session.getAttribute("accessToken");
         Long userId = (Long) session.getAttribute("userId");
@@ -60,27 +63,47 @@ public class LetterService {
         }
     }
 
-    @Transactional
-    public Letter readLetter(String hash) {
+    public LetterReadResponse readLetter(String hash, String requestPassword) {
         Optional<Letter> letter = letterRepository.findByHash(hash);
+
         if(letter.isPresent()) {
-            letter.get().setPassword(null);
-            validateOpenAt(letter.get());
-            return letter.get();
+            LetterReadResponse letterReadResponse = new LetterReadResponse(letter.get());
+
+            validateOpenAt(letterReadResponse);
+
+            // password 가 있을 경우, 패스워드 확인
+            if (requestPassword != null) {
+                validatePassword(letterReadResponse, requestPassword, letter.get().getPassword());
+            } else if (letterReadResponse.getIsEncrypted()) {
+                letterReadResponse.setTitle(null);
+                letterReadResponse.setContent(null);
+            }
+
+            return letterReadResponse;
         } else {
             System.out.println("유효하지 않은 편지" + hash);
             return null;
         }
     }
 
-    private void validateOpenAt(Letter letter) {
-        Date now = new Date();
-        if (now.compareTo(letter.getOpenAt()) > 0) {
-            letter.setReadable(true);
+    private void validatePassword(LetterReadResponse letterReadResponse, String requestPassword, String password) {
+
+        if(password.equals(HASH256(requestPassword))) {
+            letterReadResponse.setIsEncrypted(false);
         } else {
-            letter.setReadable(false);
-            letter.setTitle(null);
-            letter.setContent(null);
+            letterReadResponse.setTitle(null);
+            letterReadResponse.setContent(null);
+        }
+    }
+
+    private void validateOpenAt(LetterReadResponse letterReadResponse) {
+        Date now = new Date();
+        if (now.compareTo(letterReadResponse.getOpenAt()) > 0) {
+            letterReadResponse.setReadable(true);
+        } else {
+            letterReadResponse.setReadable(false);
+            letterReadResponse.setTitle(null);
+            letterReadResponse.setContent(null);
         }
     }
 
