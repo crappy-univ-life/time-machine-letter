@@ -1,4 +1,4 @@
-import { Button, Col, Modal, Row, Skeleton, Space, Table } from 'antd';
+import { Button, Col, Input, Modal, Row, Skeleton, Space, Table } from 'antd';
 import Countdown from 'antd/lib/statistic/Countdown';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,6 +74,8 @@ function LetterDetail() {
         </Button>]}
     >
       <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
+        <p>{data && `http://timemachineletter.tk/letter/${LetterHash}`}</p>
+        <hr />
         <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && convertDeadLine(new Date(data.openAt))} />
         <hr />
         <div style={{ padding: '10px' }}>
