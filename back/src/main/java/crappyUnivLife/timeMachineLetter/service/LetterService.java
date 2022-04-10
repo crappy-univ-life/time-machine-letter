@@ -88,7 +88,7 @@ public class LetterService {
 
     private void validatePassword(LetterReadResponse letterReadResponse, String requestPassword, String password) {
 
-        if(password.equals(HASH256(requestPassword))) {
+        if(passwordEncoder.matches(requestPassword, password)) {
             letterReadResponse.setIsEncrypted(false);
         } else {
             letterReadResponse.setTitle(null);
