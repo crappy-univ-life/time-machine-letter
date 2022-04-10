@@ -26,6 +26,13 @@ export const LetterApi = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
+    postLetterPassword: builder.mutation({
+      query: (code) => ({
+        url: '/decryption',
+        method: 'POST',
+        body: code,
+      }),
+    }),
     getSingleLetter: builder.query({
       query: (hash) => ({
         url: `/${hash}`,
@@ -57,4 +64,5 @@ export const {
   usePostLetterMutation,
   useDeleteLetterMutation,
   useUpdateLetterMutation,
+  usePostLetterPasswordMutation,
 } = LetterApi;
