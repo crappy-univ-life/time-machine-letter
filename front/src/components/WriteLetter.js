@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Button, Input, Checkbox, Col, Row, DatePicker, TimePicker, Form } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 import { usePostLetterMutation } from '../service/Letter';
 import { closeWriteModal, openPreviewModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
@@ -64,17 +65,20 @@ function WriteLetter() {
             <Controller
               control={control}
               name="antdDatePicker"
+              defaultValue={moment()}
               render={({ field: { onChange, onBlur, value } }) => (
                 <DatePicker
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
+
                 />
               )}
             />
             <Controller
               control={control}
               name="antdTimePicker"
+              defaultValue={moment()}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TimePicker
                   onChange={onChange}
