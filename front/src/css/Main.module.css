@@ -1,36 +1,41 @@
-body{
-    color:white;
-    background-color: #121212 ;
-    
+body {
+    color: white;
+    background-color: #121212;
+
 }
 
-.header{
+h1 {
+    color: white;
+}
+
+.header {
     color: "#fffffff";
     padding: 20px;
 }
-.card{
+
+.card {
     background-color: #2a2a2a77;
 }
 
-.content{
+.content {
     margin-top: 20px;
     justify-content: center;
 }
 
-.PlusSquareTwoTone{
+.PlusSquareTwoTone {
     font-size: 50px;
     color: black;
 }
 
-.LoginOutlined{
+.LoginOutlined {
     font-size: 30px;
     color: #08c;
 }
 
-.backgroundImg{
+.backgroundImg {
     background-position: center center;
     background-image: url("../img/bonfire.jpg");
-    background-repeat : no-repeat;
+    background-repeat: no-repeat;
     background-size: 100% 100vh;
     height: 100vh;
     white-space: pre-line;
