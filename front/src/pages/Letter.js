@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useGetSingleLetterQuery } from '../service/Letter';
+import { useParams } from 'react-router-dom';
+import { useGetSingleLetterQuery, usePostLetterPasswordMutation } from '../service/Letter';
 import LetterView from '../components/LetterView';
 import LetterLoading from '../components/LetterLoading';
 
@@ -29,11 +30,19 @@ const dummyQuery = () => {
 };
 
 function Letter() {
-  // const { data, isError } = useGetSingleLetterQuery();
-  const { data, isLoading } = dummyQuery();
+  const { hash } = useParams();
+  const { data, isSuccess } = useGetSingleLetterQuery(hash);
+  // const { data, isLoading } = dummyQuery();
+  // 데이터 저장 state도 필요
+  const [letterData, setLetterData] = useState(data);
+  useEffect(() => {
+    if (data) {
+      setLetterData(data);
+    }
+  }, [data, isSuccess]);
   return (
     <>
-      {!isLoading && (data.readable && !data.iscrypted ? <LetterView data={data} /> : <LetterLoading data={data} />)}
+      {letterData && ((letterData.readable && !letterData.isEncrypted) ? <LetterView data={letterData} /> : <LetterLoading data={letterData} setLetterData={setLetterData} />)}
     </>
   );
 }
