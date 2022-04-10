@@ -3,9 +3,9 @@ import { Button, Card, Col, Image, Layout, Menu, Row, Tabs } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Content, Header } from 'antd/lib/layout/layout';
 import SubMenu from 'antd/lib/menu/SubMenu';
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import useModal from '../Hooks/useModal';
@@ -19,16 +19,16 @@ import LetterUpdate from '../components/LetterUpdate';
 
 const { TabPane } = Tabs;
 
+export function RequireAuth({ children }) {
+  const { data, isSuccess } = useGetLetterListQuery();
+  return (isSuccess && (data.email ? children : <Navigate to="/login" />));
+}
+
 function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logout, result] = useLogoutMutation();
-  const { data, isSuccess } = useGetLetterListQuery();
-  useEffect(() => {
-    if (data == null && isSuccess) {
-      navigate('/login');
-    }
-  }, [data, isSuccess]);
+
   useEffect(() => {
     if (result.error) {
       alert('로그아웃 실패');
@@ -59,7 +59,6 @@ function Main() {
       </Row>
       <Row className={style.content}>
         <Col md={12}>
-          {data && (
           <Tabs defaultActiveKey="1" style={{ padding: '10px' }}>
             <TabPane tab="전체 편지" key="1">
               <LetterList allLetter />
@@ -71,7 +70,6 @@ function Main() {
               <LetterList openLetter />
             </TabPane>
           </Tabs>
-          )}
           <Row className={style.content}>
             <Col>
               <PlusSquareTwoTone twoToneColor="black" className={style.PlusSquareTwoTone} onClick={() => dispatch(openWriteModal())} />
