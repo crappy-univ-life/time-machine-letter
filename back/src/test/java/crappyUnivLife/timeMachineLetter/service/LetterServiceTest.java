@@ -2,6 +2,7 @@ package crappyUnivLife.timeMachineLetter.service;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
 import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
@@ -77,7 +78,7 @@ class LetterServiceTest {
         letter.setMember(member);
         letterService.createLetter(letter, session);
 
-        Letter resultLetter = letterService.readLetter(letter.getHash());
+        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null);
         Assertions.assertTrue(resultLetter.getReadable());
     }
 
@@ -99,7 +100,7 @@ class LetterServiceTest {
         letter.setMember(member);
         letterService.createLetter(letter, session);
 
-        Letter resultLetter = letterService.readLetter(letter.getHash());
+        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null);
 
         Assertions.assertFalse(resultLetter.getReadable());
     }

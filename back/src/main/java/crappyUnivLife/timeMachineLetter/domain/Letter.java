@@ -19,7 +19,8 @@ public class Letter {
 
     private String hash;
 
-    private Boolean readable;
+    private Boolean readable = true;
+    private Boolean isEncrypted = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -38,9 +39,7 @@ public class Letter {
 
     private String letterTo;
 
-    private Long view_count;
-
-    private Date createAt;
+    private Date createAt = new Date();
 
     // 연관관계 편의 매서드 //
     public void setMember(Member member) {

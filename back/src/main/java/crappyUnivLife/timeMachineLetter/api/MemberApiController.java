@@ -2,6 +2,8 @@ package crappyUnivLife.timeMachineLetter.api;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.DecryptionLetterRequest;
+import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
 import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.service.LetterService;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
@@ -41,7 +43,12 @@ public class MemberApiController {
     }
 
     @GetMapping("/letter/{hash}")
-    public Letter postReadRequest(@PathVariable(value="hash") String hash) {
-        return letterService.readLetter(hash);
+    public LetterReadResponse letterReadRequest(@PathVariable(value="hash") String hash) {
+        return letterService.readLetter(hash, null);
+    }
+
+    @PostMapping("/letter/decryption")
+    public LetterReadResponse decryptionLetterRequest(@RequestBody DecryptionLetterRequest decryptionLetterRequest) {
+        return letterService.readLetter(decryptionLetterRequest.getHash(), decryptionLetterRequest.getPassword());
     }
 }
