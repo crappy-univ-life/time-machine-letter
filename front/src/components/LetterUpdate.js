@@ -6,24 +6,15 @@ import { usePostLetterMutation, useUpdateLetterMutation } from '../service/Lette
 import { closeUpdateModal, closeWriteModal, openPreviewModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
 import { setSingleLetter } from '../store/letter';
+import { convertSendDate } from '../utils/converter';
 
 const { TextArea } = Input;
 
-const convertSendDate = (data) => {
-  const date = new Date(data.antdDatePicker);
-  const time = new Date(data.antdTimePicker);
-  const openAt = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-  delete data.antdDatePicker;
-  delete data.antdTimePicker;
-  const sendData = { ...data, openAt };
-  return sendData;
-};
-
 function LetterUpdate() {
+  const dispatch = useDispatch();
   const modalVisible = useSelector((state) => state.global.updateModal);
   const singleLetter = useSelector((state) => state.letter.singleLetter);
 
-  const dispatch = useDispatch();
   const { handleSubmit, control, getValues, reset } = useForm();
   const [updateLetter, result] = useUpdateLetterMutation();
   const formRef = useRef();

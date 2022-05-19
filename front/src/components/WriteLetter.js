@@ -7,18 +7,9 @@ import { usePostLetterMutation } from '../service/Letter';
 import { closeWriteModal, openPreviewModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
 import { setSingleLetter } from '../store/letter';
+import { convertSendDate } from '../utils/converter';
 
 const { TextArea } = Input;
-
-const convertSendDate = (data) => {
-  const date = new Date(data.antdDatePicker);
-  const time = new Date(data.antdTimePicker);
-  const openAt = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
-  delete data.antdDatePicker;
-  delete data.antdTimePicker;
-  const sendData = { ...data, openAt };
-  return sendData;
-};
 
 function WriteLetter() {
   const modalVisible = useSelector((state) => state.global.writeModal);

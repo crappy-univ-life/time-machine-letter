@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
 import { useDeleteLetterMutation, useGetSingleLetterQuery } from '../service/Letter';
 import { closeDetailModal, openPreviewModal, openUpdateModal, openWriteModal } from '../store/global';
+import { formatOpenTime } from '../utils/time';
 import LetterPreviewModal from './LetterPreviewModal';
 import LetterView from './LetterView';
 import WriteLetter from './WriteLetter';
@@ -33,8 +34,6 @@ const dummyQuery = () => {
   }, []);
   return { isLoading, data };
 };
-
-const convertDeadLine = (date) => date.getTime();
 
 function LetterDetail() {
   const modal = useSelector((state) => state.global.detailModal);
@@ -75,7 +74,7 @@ function LetterDetail() {
       <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
         <p>{data && `http://timemachineletter.tk/letter/${LetterHash}`}</p>
         <hr />
-        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && convertDeadLine(new Date(data.openAt))} />
+        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && formatOpenTime(data.openAt)} />
         <hr />
         <div style={{ padding: '10px' }}>
           <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data?.title}</h1>

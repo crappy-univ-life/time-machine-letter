@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import style from '../css/Main.module.css';
 import { usePostLetterPasswordMutation } from '../service/Letter';
+import { formatOpenTime, formatTime } from '../utils/time';
 
 function PasswordInput({ setLetterData }) {
   const [passwordPost, result] = usePostLetterPasswordMutation();
@@ -43,9 +44,7 @@ const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
     return <p>비밀번호를 입력해 주세요</p>;
   }
-  const hours = Math.floor(remainingTime / 3600).toString().padStart(2, '0');
-  const minutes = Math.floor((remainingTime % 3600) / 60).toString().padStart(2, '0');
-  const seconds = (remainingTime % 60).toString().padStart(2, '0');
+  const { hours, minutes, seconds } = formatTime(remainingTime);
   return (
     <div className="timer">
       <div className="text"><h1>남은시간</h1></div>
@@ -59,7 +58,7 @@ const renderTime = ({ remainingTime }) => {
 function LetterLoading({ data, setLetterData }) {
   const [isFinish, setIsFinish] = useState(false);
   const nowTime = new Date().getTime();
-  const openTime = new Date(data.openAt).getTime();
+  const openTime = formatOpenTime(data);
   const duration = (openTime - nowTime) / 1000;
 
   return (
