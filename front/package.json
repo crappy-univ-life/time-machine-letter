@@ -6,7 +6,6 @@
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.19.2",
     "antd-button-color": "^1.0.4",
@@ -49,11 +48,13 @@
     "@babel/core": "^7.17.7",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/react": "^12.1.5",
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.3.0"
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^28.1.0"
   }
 }
