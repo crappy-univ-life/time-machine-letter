@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
-import useModal from '../Hooks/useModal';
 import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
 import { useLogoutMutation } from '../service/login';

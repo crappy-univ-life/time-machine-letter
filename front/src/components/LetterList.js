@@ -3,7 +3,6 @@ import Meta from 'antd/lib/card/Meta';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import style from '../css/Main.module.css';
-import useModal from '../Hooks/useModal';
 import { openDetailModal } from '../store/global';
 import LetterDetail from './LetterDetail';
 

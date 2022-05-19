@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
-import useModal from '../Hooks/useModal';
 import { useDeleteLetterMutation, useGetSingleLetterQuery } from '../service/Letter';
 import { closeDetailModal, openPreviewModal, openUpdateModal, openWriteModal } from '../store/global';
 import LetterPreviewModal from './LetterPreviewModal';
