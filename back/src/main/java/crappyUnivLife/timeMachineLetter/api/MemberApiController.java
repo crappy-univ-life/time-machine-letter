@@ -34,8 +34,13 @@ public class MemberApiController {
     }
 
     @GetMapping("/letter")
-    public PostListResponse letterListRequest(HttpSession session) {
+    public LetterListResponse letterListRequest(HttpSession session) {
         return letterService.getLetterList(session);
+    }
+
+    @GetMapping("/receiveLetter")
+    public ReceivePostListResponse receiveLetterListRequest(HttpSession session) {
+        return letterService.getReceiveLetterList(session);
     }
 
     @PostMapping("/letter")

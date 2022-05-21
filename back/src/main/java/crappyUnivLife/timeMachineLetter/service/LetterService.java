@@ -2,6 +2,7 @@ package crappyUnivLife.timeMachineLetter.service;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
 import crappyUnivLife.timeMachineLetter.dto.ReceivePostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.LetterRepository;
@@ -42,6 +43,20 @@ public class LetterService {
         } else {
             // 세션 유효하지 않음.
             return new LetterListResponse(null, null);
+        }
+    }
+    public ReceivePostListResponse getReceiveLetterList(HttpSession session) {
+
+        String accessToken = (String)session.getAttribute("accessToken");
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (accessToken != null) {
+            Member member = memberRepository.findOne(userId);
+            List<Letter> letterReceiveList = letterRepository.getReceiveLetterList(member.getEmail());
+            return new ReceivePostListResponse(member.getEmail(), letterReceiveList);
+        } else {
+            // 세션 유효하지 않음.
+            return new ReceivePostListResponse(null, null);
         }
     }
 
