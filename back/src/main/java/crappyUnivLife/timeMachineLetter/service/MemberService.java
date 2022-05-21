@@ -3,7 +3,7 @@ package crappyUnivLife.timeMachineLetter.service;
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
-import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
+import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class MemberService {
     private final LetterService letterService;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public PostListResponse kakaoLogin(String authorizedCode, HttpSession session) {
+    public LetterListResponse kakaoLogin(String authorizedCode, HttpSession session) {
         String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 

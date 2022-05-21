@@ -48,7 +48,7 @@ class LetterServiceTest {
         letterService.createLetter(letter2, session);
 
 
-        PostListResponse postListResponse = letterService.getLetterList(session);
+        LetterListResponse postListResponse = letterService.getLetterList(session);
 
         Assertions.assertEquals(postListResponse.getEmail(), member.getEmail());
         Assertions.assertEquals(postListResponse.getLetterList().size(), 2);
