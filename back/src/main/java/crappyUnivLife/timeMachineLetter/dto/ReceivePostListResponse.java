@@ -4,17 +4,16 @@ import crappyUnivLife.timeMachineLetter.domain.Letter;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @ToString
-public class PostListResponse {
-    public PostListResponse(String email, List<Letter> letterList) {
+public class ReceivePostListResponse {
+    public ReceivePostListResponse(String email, List<Letter> receiveLetterList) {
         this.email = email;
-        this.letterList = letterList;
+        this.receiveLetterList = receiveLetterList;
     }
 
     private String email;
-    private List<Letter> letterList;
+    private List<Letter> receiveLetterList;
 }

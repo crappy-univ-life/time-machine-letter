@@ -2,8 +2,9 @@ package crappyUnivLife.timeMachineLetter.service;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
-import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
+import crappyUnivLife.timeMachineLetter.dto.ReceivePostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.LetterRepository;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class LetterService {
     private final LetterRepository letterRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public PostListResponse getLetterList(HttpSession session) {
+    public LetterListResponse getLetterList(HttpSession session) {
 
         String accessToken = (String)session.getAttribute("accessToken");
         Long userId = (Long) session.getAttribute("userId");
@@ -38,10 +39,24 @@ public class LetterService {
         if (accessToken != null) {
             Member member = memberRepository.findOne(userId);
             List<Letter> letterList = letterRepository.getLetterList(member.getId());
-            return new PostListResponse(member.getEmail(), letterList);
+            return new LetterListResponse(member.getEmail(), letterList);
         } else {
             // 세션 유효하지 않음.
-            return new PostListResponse(null, null);
+            return new LetterListResponse(null, null);
+        }
+    }
+    public ReceivePostListResponse getReceiveLetterList(HttpSession session) {
+
+        String accessToken = (String)session.getAttribute("accessToken");
+        Long userId = (Long) session.getAttribute("userId");
+
+        if (accessToken != null) {
+            Member member = memberRepository.findOne(userId);
+            List<Letter> letterReceiveList = letterRepository.getReceiveLetterList(member.getEmail());
+            return new ReceivePostListResponse(member.getEmail(), letterReceiveList);
+        } else {
+            // 세션 유효하지 않음.
+            return new ReceivePostListResponse(null, null);
         }
     }
 

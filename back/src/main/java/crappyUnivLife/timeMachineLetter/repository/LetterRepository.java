@@ -36,4 +36,10 @@ public class LetterRepository {
                 .getResultList();
         return letter.stream().findAny();
     }
+
+    public List<Letter> getReceiveLetterList(String receiverEmail) {
+        return em.createQuery("select l from Letter l where l.letterTo = :receiverEmail", Letter.class)
+                .setParameter("receiverEmail", receiverEmail)
+                .getResultList();
+    }
 }

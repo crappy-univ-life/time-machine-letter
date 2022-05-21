@@ -2,28 +2,22 @@ package crappyUnivLife.timeMachineLetter.service;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
-import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 //@Rollback(false) //직접 데이터 보고싶을때
@@ -54,7 +48,7 @@ class LetterServiceTest {
         letterService.createLetter(letter2, session);
 
 
-        PostListResponse postListResponse = letterService.getLetterList(session);
+        LetterListResponse postListResponse = letterService.getLetterList(session);
 
         Assertions.assertEquals(postListResponse.getEmail(), member.getEmail());
         Assertions.assertEquals(postListResponse.getLetterList().size(), 2);

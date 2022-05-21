@@ -3,8 +3,9 @@ package crappyUnivLife.timeMachineLetter.api;
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.DecryptionLetterRequest;
+import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
-import crappyUnivLife.timeMachineLetter.dto.PostListResponse;
+import crappyUnivLife.timeMachineLetter.dto.ReceivePostListResponse;
 import crappyUnivLife.timeMachineLetter.service.LetterService;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class MemberApiController {
 
 
     @PostMapping("/user/login")
-    public PostListResponse loginRequest(@RequestBody String authorizedCode, HttpSession session) {
+    public LetterListResponse loginRequest(@RequestBody String authorizedCode, HttpSession session) {
         return memberService.kakaoLogin(authorizedCode, session);
     }
 
@@ -33,8 +34,13 @@ public class MemberApiController {
     }
 
     @GetMapping("/letter")
-    public PostListResponse letterListRequest(HttpSession session) {
+    public LetterListResponse letterListRequest(HttpSession session) {
         return letterService.getLetterList(session);
+    }
+
+    @GetMapping("/receiveLetter")
+    public ReceivePostListResponse receiveLetterListRequest(HttpSession session) {
+        return letterService.getReceiveLetterList(session);
     }
 
     @PostMapping("/letter")
