@@ -2,23 +2,27 @@ package crappyUnivLife.timeMachineLetter.repository;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+@WebAppConfiguration
 @SpringBootTest
 @Transactional
-@Rollback(false) //직접 데이터 보고싶을때
+//@Rollback(false) //직접 데이터 보고싶을때
 public class LetterRepositoryTest {
 
     @Autowired EntityManager em;
