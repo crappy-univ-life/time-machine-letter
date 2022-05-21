@@ -50,4 +50,31 @@ public class LetterRepositoryTest {
         //then
         assertEquals(letter, letterRepository.findOne(2L));
     }
+
+    @Test
+    void 받은_편지_목록_불러오기() {
+        //given
+        Member member = new Member("보낸사람@naver.com", "jinuCheon");
+        memberRepository.save(member);
+
+        em.flush();
+
+        Letter letter = new Letter();
+        letter.setLetterTo("받는사람@naver.com");
+        letter.setPassword("1234");
+        letter.setTitle("제목");
+        letter.setContent("내용");
+        letter.setMember(member);
+        letterRepository.save(letter);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<Letter> letters = letterRepository.getReceiveLetterList("받는사람@naver.com");
+
+        //then
+        System.out.println("letters.get(0).getLetterTo() = " + letters.get(0).getLetterTo());
+        assertEquals(letters.get(0).getTitle(), letter.getTitle());
+    }
 }
