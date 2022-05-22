@@ -1,16 +1,17 @@
 import { Card, Col, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
-import style from '../css/Main.module.css';
-import { openDetailModal } from '../store/global';
-import LetterDetail from './LetterDetail';
+
+import style from '../../css/Main.module.css';
+import { openDetailModal } from '../../store/global';
+import LetterDetail from '../LetterDetail';
+import LetterListCard from './LetterListCard';
 
 function LetterList({ openLetter, closeLetter, allLetter }) {
-  const letterList = useSelector((state) => state.letter.letterList);
+  const dispatch = useDispatch();
+  const { letterList } = useSelector((state) => state.letter);
   const today = new Date();
   let showList = [];
-  const dispatch = useDispatch();
   if (openLetter) {
     showList = letterList.filter((letter) => new Date(letter.openAt) < today);
   } else if (closeLetter) {
@@ -18,15 +19,16 @@ function LetterList({ openLetter, closeLetter, allLetter }) {
   } else if (allLetter) {
     showList = letterList;
   }
+
+  const onCardClick = (hash) => {
+    dispatch(openDetailModal(hash));
+  };
   return (
     <Row gutter={[20, 20]} align="center" sm={12}>
       {showList.map((letter) => (
-        <Col lg={12} xs={22}>
-          <Card bordered={false} hoverable className={style.card} onClick={() => dispatch(openDetailModal(letter.hash))}><Meta title={letter.title} description={moment(letter.createAt).format('YYYY-MM-DD')} /></Card>
-        </Col>
+        <LetterListCard letter={letter} onCardClick={onCardClick} key={letter.hash} />
       ))}
     </Row>
-
   );
 }
 
