@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         
         descLabel = UILabel()
         descLabel.text = "서비스를 시작하는것으로 서비스 약관과 개인정보 제공을 동의합니다"
-        descLabel.font = UIFont.systemFont(ofSize: 12)
+        descLabel.font = UIFont.systemFont(ofSize: 11)
         descLabel.textColor = .darkGray
         descLabel.textAlignment = .center
         descLabel.numberOfLines = 1
@@ -52,12 +52,11 @@ class LoginViewController: UIViewController {
             
             descLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.9),
             descLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descLabel.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            descLabel.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20),
         ])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("서비스를 시작하는것으로 서비스 약관과 개인정보 제공을 동의합니다")
     }
 }
