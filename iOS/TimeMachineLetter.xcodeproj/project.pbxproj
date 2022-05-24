@@ -17,6 +17,7 @@
 		429ADB3228198B6D00C97DC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429ADB3028198B6D00C97DC1 /* Main.storyboard */; };
 		429ADB3428198B6E00C97DC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 429ADB3328198B6E00C97DC1 /* Assets.xcassets */; };
 		429ADB3728198B6E00C97DC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429ADB3528198B6E00C97DC1 /* LaunchScreen.storyboard */; };
+		53AD284A283CA7AB00CA7F2A /* WritingLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD2849283CA7AB00CA7F2A /* WritingLetterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		429ADB3328198B6E00C97DC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		429ADB3628198B6E00C97DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		429ADB3828198B6E00C97DC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53AD2849283CA7AB00CA7F2A /* WritingLetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingLetterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +62,7 @@
 				42966133283BBC1900D58494 /* MainViewController.swift */,
 				42966135283BC11800D58494 /* TableViewCell.swift */,
 				42393ADB283CBF8F009FD571 /* OpenedViewController.swift */,
-				42393ADD283CBFF3009FD571 /* ClosedViewController.swift */,
+				53AD2849283CA7AB00CA7F2A /* WritingLetterViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +178,7 @@
 			files = (
 				42966136283BC11800D58494 /* TableViewCell.swift in Sources */,
 				424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */,
+				53AD284A283CA7AB00CA7F2A /* WritingLetterViewController.swift in Sources */,
 				429ADB2B28198B6D00C97DC1 /* AppDelegate.swift in Sources */,
 				42393ADC283CBF8F009FD571 /* OpenedViewController.swift in Sources */,
 				429ADB2D28198B6D00C97DC1 /* SceneDelegate.swift in Sources */,
