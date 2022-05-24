@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42393ADC283CBF8F009FD571 /* OpenedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42393ADB283CBF8F009FD571 /* OpenedViewController.swift */; };
+		42393ADE283CBFF3009FD571 /* ClosedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42393ADD283CBFF3009FD571 /* ClosedViewController.swift */; };
 		424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BED62283A76ED00B2CBB5 /* LoginViewController.swift */; };
 		42966134283BBC1900D58494 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42966133283BBC1900D58494 /* MainViewController.swift */; };
 		42966136283BC11800D58494 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42966135283BC11800D58494 /* TableViewCell.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42393ADB283CBF8F009FD571 /* OpenedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedViewController.swift; sourceTree = "<group>"; };
+		42393ADD283CBFF3009FD571 /* ClosedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedViewController.swift; sourceTree = "<group>"; };
 		424BED62283A76ED00B2CBB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42966133283BBC1900D58494 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		42966135283BC11800D58494 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 				424BED62283A76ED00B2CBB5 /* LoginViewController.swift */,
 				42966133283BBC1900D58494 /* MainViewController.swift */,
 				42966135283BC11800D58494 /* TableViewCell.swift */,
+				42393ADB283CBF8F009FD571 /* OpenedViewController.swift */,
+				42393ADD283CBFF3009FD571 /* ClosedViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,8 +177,10 @@
 				42966136283BC11800D58494 /* TableViewCell.swift in Sources */,
 				424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */,
 				429ADB2B28198B6D00C97DC1 /* AppDelegate.swift in Sources */,
+				42393ADC283CBF8F009FD571 /* OpenedViewController.swift in Sources */,
 				429ADB2D28198B6D00C97DC1 /* SceneDelegate.swift in Sources */,
 				42966134283BBC1900D58494 /* MainViewController.swift in Sources */,
+				42393ADE283CBFF3009FD571 /* ClosedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

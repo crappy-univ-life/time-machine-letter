@@ -7,44 +7,29 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
-    
-    let myTableView: UITableView = UITableView()
-    let items: [String] = ["hello", "swift", "ios"]
+class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let openedVC = OpenedViewController()
+        let closedVC = ClosedViewController()
         
-        myTableView.dataSource = self
-        myTableView.delegate = self
+        self.setViewControllers([openedVC, closedVC], animated: true)
         
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
-        myTableView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(myTableView)
+        tabBar.backgroundColor = .white
+        tabBar.items?[0].image = UIImage(named: "opened")
+        tabBar.items?[0].title = "Opened"
+        tabBar.items?[1].image = UIImage(named: "closed")
+        tabBar.items?[1].title = "Closed"
+        tabBar.tintColor = .systemYellow
         
         NSLayoutConstraint.activate([
-            myTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            myTableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            myTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            myTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+            
         ])
     }
 }
 
-extension MainViewController: UITableViewDelegate {
-    
-}
 
-extension MainViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
-        
-        return cell
-    }
-}
+
+
+

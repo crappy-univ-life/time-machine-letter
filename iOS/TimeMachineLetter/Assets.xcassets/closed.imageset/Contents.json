@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "icons8-envelope-dots-30.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "kakao_login_large_narrow.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
