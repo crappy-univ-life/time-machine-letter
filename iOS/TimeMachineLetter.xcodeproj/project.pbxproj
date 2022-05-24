@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BED62283A76ED00B2CBB5 /* LoginViewController.swift */; };
+		42966134283BBC1900D58494 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42966133283BBC1900D58494 /* MainViewController.swift */; };
+		42966136283BC11800D58494 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42966135283BC11800D58494 /* TableViewCell.swift */; };
 		429ADB2B28198B6D00C97DC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429ADB2A28198B6D00C97DC1 /* AppDelegate.swift */; };
 		429ADB2D28198B6D00C97DC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429ADB2C28198B6D00C97DC1 /* SceneDelegate.swift */; };
 		429ADB3228198B6D00C97DC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429ADB3028198B6D00C97DC1 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		424BED62283A76ED00B2CBB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		42966133283BBC1900D58494 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		42966135283BC11800D58494 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		429ADB2728198B6D00C97DC1 /* TimeMachineLetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeMachineLetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		429ADB2A28198B6D00C97DC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		429ADB2C28198B6D00C97DC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 			children = (
 				429ADB3028198B6D00C97DC1 /* Main.storyboard */,
 				424BED62283A76ED00B2CBB5 /* LoginViewController.swift */,
+				42966133283BBC1900D58494 /* MainViewController.swift */,
+				42966135283BC11800D58494 /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -162,9 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42966136283BC11800D58494 /* TableViewCell.swift in Sources */,
 				424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */,
 				429ADB2B28198B6D00C97DC1 /* AppDelegate.swift in Sources */,
 				429ADB2D28198B6D00C97DC1 /* SceneDelegate.swift in Sources */,
+				42966134283BBC1900D58494 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

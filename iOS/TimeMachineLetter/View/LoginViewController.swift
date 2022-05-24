@@ -5,7 +5,6 @@
 //  Created by Dean on 2022/05/22.
 //
 
-import Foundation
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -29,6 +28,7 @@ class LoginViewController: UIViewController {
         loginButton = UIButton()
         loginButton.setImage(UIImage(named: "kakaoLogin"), for: .normal)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         view.addSubview(loginButton)
         
         descLabel = UILabel()
@@ -54,6 +54,13 @@ class LoginViewController: UIViewController {
             descLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descLabel.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20),
         ])
+    }
+    
+    @objc func buttonAction(sender: UIButton!) {
+                
+        let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        mainVC.modalPresentationStyle = .fullScreen
+        present(mainVC, animated: true)
     }
     
     override func viewDidLoad() {

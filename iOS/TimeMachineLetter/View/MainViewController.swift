@@ -1,0 +1,50 @@
+//
+//  MainViewController.swift
+//  TimeMachineLetter
+//
+//  Created by Dean on 2022/05/23.
+//
+
+import UIKit
+
+class MainViewController: UIViewController {
+    
+    let myTableView: UITableView = UITableView()
+    let items: [String] = ["hello", "swift", "ios"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(myTableView)
+        
+        NSLayoutConstraint.activate([
+            myTableView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            myTableView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            myTableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            myTableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+}
+
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+        cell.textLabel?.text = items[indexPath.row]
+        
+        return cell
+    }
+}
