@@ -22,14 +22,9 @@ class MainViewController: UITabBarController {
         tabBar.items?[1].image = UIImage(named: "closed")
         tabBar.items?[1].title = "Closed"
         tabBar.tintColor = .systemYellow
+        tabBar.layer.borderColor = UIColor.darkGray.cgColor
+        tabBar.layer.borderWidth = 0.2
+        tabBar.clipsToBounds = true
         
-        NSLayoutConstraint.activate([
-            
-        ])
     }
 }
-
-
-
-
-

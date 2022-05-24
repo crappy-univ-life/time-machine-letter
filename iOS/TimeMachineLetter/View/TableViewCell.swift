@@ -9,23 +9,43 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
-    let courseName = UILabel()
+    var title = UILabel()
+    var time = UILabel()
+    var badge = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Set any attributes of your UI components here.
-        courseName.translatesAutoresizingMaskIntoConstraints = false
-        courseName.font = UIFont.systemFont(ofSize: 20)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = UIFont.systemFont(ofSize: 20)
         
-        // Add the UI components
-        contentView.addSubview(courseName)
+        time.translatesAutoresizingMaskIntoConstraints = false
+        time.font = UIFont.systemFont(ofSize: 18)
+        time.textColor = .darkGray
+        
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        badge.backgroundColor = .systemYellow
+        badge.layer.cornerRadius = 5
+        badge.clipsToBounds = true
+        
+        contentView.addSubview(title)
+        contentView.addSubview(time)
+        contentView.addSubview(badge)
+        
         
         NSLayoutConstraint.activate([
-            courseName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            courseName.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            courseName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            courseName.heightAnchor.constraint(equalToConstant: 50)
+            
+            badge.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            badge.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            badge.heightAnchor.constraint(equalToConstant: 10),
+            badge.widthAnchor.constraint(equalToConstant: 10),
+            
+            title.leadingAnchor.constraint(equalTo: badge.trailingAnchor, constant: 10),
+            title.centerYAnchor.constraint(equalTo: badge.centerYAnchor),
+            
+            time.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
+            time.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            time.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
@@ -33,4 +53,3 @@ class TableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
