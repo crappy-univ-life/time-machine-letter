@@ -12,7 +12,7 @@ N분 후, N일 후, N년 후의 누군가에게 메시지를 보내봅시다.
 
 ## 세부 내용
 프로젝트 및 개발 문서는 노션을 참고해주세요 <br/>
-https://isthisuniv.notion.site/543907e3e0b54e02b7b37ca88b4fbc15
+https://vintage-bowl-6ca.notion.site/f32ec612c164487ba139d9923a083eb8
 
 
 ## 참여 인원
@@ -21,7 +21,13 @@ https://isthisuniv.notion.site/543907e3e0b54e02b7b37ca88b4fbc15
 
 🦸‍♂️ <b>Back - <a href="https://github.com/JinuCheon">천진우(깻묵)</a></b>
 
-🦹‍♂️  <b>Front - <a href="https://github.com/Yoon-Hae-Min">윤해민(만두피)</a></b>
+🦹‍♂️ <b>Front - <a href="https://github.com/Yoon-Hae-Min">윤해민(만두피)</a></b>
+
+🦸🏿‍♂️ <b>iOS - <a href="https://github.com/deanidh">배승빈(딘배)</a></b>
+
+🦸🏼‍♂️ <b>iOS - <a href="https://github.com/LEEINSEO-0118">이인서(INSEO)</a></b>
+
+
 
 ## 주요 기능
 
