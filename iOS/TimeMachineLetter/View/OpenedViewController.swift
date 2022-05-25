@@ -64,7 +64,6 @@ class OpenedViewController: UIViewController {
     }
     @objc func writeAction(sender: UIButton!) {
         let writeVC = WritingLetterViewController()
-        writeVC.modalPresentationStyle = .fullScreen
         present(writeVC, animated: true)
     }
 }
