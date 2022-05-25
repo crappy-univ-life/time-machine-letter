@@ -54,7 +54,7 @@ class WritingLetterViewController: UIViewController {
         var label = UILabel()
         label.text = "새로운 편지"
         label.textColor = UIColor.black
-        label.font = UIFont(name: label.font.fontName, size: 20)
+        label.font = UIFont.systemFont(ofSize: 30.0, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
@@ -79,22 +79,12 @@ class WritingLetterViewController: UIViewController {
     }()
     
     //MARK: - title object
-    private lazy var titleStack: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [titleLabel, titleTextField]) // let에서는 등록이 안되는데 lazy var로 객체를 생성하면 가능
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillProportionally
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
     
     private let titleLabel: UILabel = {
         var label = UILabel()
         label.text = "제목: "
         label.textColor = .gray
-        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -111,22 +101,12 @@ class WritingLetterViewController: UIViewController {
     }()
     
     //MARK: - sender object
-    private lazy var senderStack: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [senderLabel, senderTextField]) // let에서는 등록이 안되는데 lazy var로 객체를 생성하면 가능
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillProportionally
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
     
     private let senderLabel: UILabel = {
         var label = UILabel()
         label.text = "발신자: "
         label.textColor = .gray
-        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -143,22 +123,12 @@ class WritingLetterViewController: UIViewController {
     }()
     
     //MARK: - receiver object
-    private lazy var receiverStack: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [receiverLabel, receiverTextField]) // let에서는 등록이 안되는데 lazy var로 객체를 생성하면 가능
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillProportionally
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
     
     private let receiverLabel: UILabel = {
         var label = UILabel()
         label.text = "수신자: "
         label.textColor = .gray
-        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -175,24 +145,13 @@ class WritingLetterViewController: UIViewController {
     }()
     
     //MARK: - password object
-    private lazy var passwordStack: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField]) // let에서는 등록이 안되는데 lazy var로 객체를 생성하면 가능
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillProportionally
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
     
     private let passwordLabel: UILabel = {
         var label = UILabel()
         label.text = "비밀번호: "
         label.textColor = .gray
-        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         label.translatesAutoresizingMaskIntoConstraints = false
-
         
         return label
     }()
@@ -207,33 +166,64 @@ class WritingLetterViewController: UIViewController {
         return textField
     }()
     
-    //MARK: - main stack
-    private lazy var mainStack: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [titleStack, senderStack, receiverStack, passwordStack])
-        stack.axis = .vertical
-        stack.alignment = .leading // 왼쪽 끝으로 정렬
-        stack.distribution = .fillProportionally
-        stack.spacing = 10
+    //MARK: - Division Line
+    private let divisionLine1: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .gray
+        
+        return view
+    }()
     
-//        if stack.arrangedSubviews.count > 0 {
-//            let separator = UIView()
-//            separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//            separator.backgroundColor = .gray
-//            stack.addArrangedSubview(separator)
-//            separator.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 1).isActive = true
-//        }
+    private let divisionLine2: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .gray
         
-        stack.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let divisionLine3: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .gray
         
-        return stack
+        return view
+    }()
+    
+    private let divisionLine4: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let divisionLineUnderDate: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .gray
+        
+        return view
     }()
     
     //MARK: - date and time object
+    
     private let dateAndTimeLabel: UILabel = {
         var label = UILabel()
         label.text = "날짜 및 시간:"
         label.textColor = .gray
-        label.font = UIFont(name: label.font.fontName, size: 15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -252,17 +242,16 @@ class WritingLetterViewController: UIViewController {
         return picker
     }()
     
-    private let mainTextField: UITextField = {
-        var textField = UITextField()
-        textField.text = "편지를 작성하세요."
-        textField.textColor = .gray
-        textField.font?.withSize(15)
+    //MARK: - mainTextView
+    
+    private let mainTextView: UITextView = {
+        var textView = UITextView()
+        textView.text = "편지를 작성하세요."
+        textView.textColor = .gray
+        textView.font = UIFont.systemFont(ofSize: 15.0)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
+        return textView
     }()
     
     //MARK: - viewDidLoad
@@ -271,8 +260,7 @@ class WritingLetterViewController: UIViewController {
         super.viewDidLoad()
         addingView()
         settingLayout()
-
-        // Do any additional setup after loading the view.
+        delegating()
     }
     
     //MARK: - addingView
@@ -286,19 +274,38 @@ class WritingLetterViewController: UIViewController {
         mainScroll.addSubview(previewButton)
         mainScroll.addSubview(sendButton)
         
-        mainScroll.addSubview(mainStack)
+        mainScroll.addSubview(titleLabel)
+        mainScroll.addSubview(titleTextField)
+        mainScroll.addSubview(divisionLine1)
         
+        mainScroll.addSubview(senderLabel)
+        mainScroll.addSubview(senderTextField)
+        mainScroll.addSubview(divisionLine2)
+
+        mainScroll.addSubview(receiverLabel)
+        mainScroll.addSubview(receiverTextField)
+        mainScroll.addSubview(divisionLine3)
+
+        mainScroll.addSubview(passwordLabel)
+        mainScroll.addSubview(passwordTextField)
+        mainScroll.addSubview(divisionLine4)
+
         mainScroll.addSubview(dateAndTimeLabel)
         mainScroll.addSubview(dateAndTimePicker)
-        
-        mainScroll.addSubview(mainTextField)
+        mainScroll.addSubview(divisionLineUnderDate)
+
+        mainScroll.addSubview(mainTextView)
         
         }
     
     //MARK: - delegating
     
     private func delegating() {
-        
+        titleTextField.delegate = self
+        senderTextField.delegate = self
+        receiverTextField.delegate = self
+        passwordTextField.delegate = self
+        mainTextView.delegate = self
     }
     
     //MARK: - settingLayout
@@ -317,36 +324,115 @@ class WritingLetterViewController: UIViewController {
             newLetterLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
             
             sendButton.centerYAnchor.constraint(equalTo: newLetterLabel.centerYAnchor),
-            sendButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20), // mainScroll의 rightAnchor에 적용했을 때는 실패, view의 rightAnchor에 적용하니 정상 작동하는 현상
-
+            sendButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            // mainScroll의 rightAnchor에 적용했을 때는 실패, view의 rightAnchor에 적용하니 정상 작동하는 현상
+            
             previewButton.centerYAnchor.constraint(equalTo: newLetterLabel.centerYAnchor),
             previewButton.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -10),
             
-            mainStack.topAnchor.constraint(equalTo: newLetterLabel.bottomAnchor, constant: 25),
-            mainStack.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
-            mainStack.rightAnchor.constraint(equalTo: mainScroll.rightAnchor, constant: 20),
-            mainStack.heightAnchor.constraint(equalToConstant: 130),
+            titleLabel.topAnchor.constraint(equalTo: newLetterLabel.bottomAnchor, constant: 25),
+            titleLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            titleLabel.widthAnchor.constraint(equalToConstant: 35),
+            titleTextField.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            titleTextField.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 10),
+            titleTextField.widthAnchor.constraint(equalToConstant: 300),
+            divisionLine1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            divisionLine1.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
             
-            dateAndTimeLabel.topAnchor.constraint(equalTo: mainStack.bottomAnchor, constant: 10),
+            senderLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+            senderLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            senderLabel.widthAnchor.constraint(equalToConstant: 45),
+            senderTextField.centerYAnchor.constraint(equalTo: senderLabel.centerYAnchor),
+            senderTextField.leftAnchor.constraint(equalTo: senderLabel.rightAnchor, constant: 10),
+            senderTextField.widthAnchor.constraint(equalToConstant: 300),
+            divisionLine2.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: 10),
+            divisionLine2.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            
+            receiverLabel.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: 25),
+            receiverLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            receiverLabel.widthAnchor.constraint(equalToConstant: 45),
+            receiverTextField.centerYAnchor.constraint(equalTo: receiverLabel.centerYAnchor),
+            receiverTextField.leftAnchor.constraint(equalTo: receiverLabel.rightAnchor, constant: 10),
+            receiverTextField.widthAnchor.constraint(equalToConstant: 250),
+            divisionLine3.topAnchor.constraint(equalTo: receiverLabel.bottomAnchor, constant: 10),
+            divisionLine3.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            
+            passwordLabel.topAnchor.constraint(equalTo: receiverLabel.bottomAnchor, constant: 25),
+            passwordLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            passwordLabel.widthAnchor.constraint(equalToConstant: 60),
+            passwordTextField.centerYAnchor.constraint(equalTo: passwordLabel.centerYAnchor),
+            passwordTextField.leftAnchor.constraint(equalTo: passwordLabel.rightAnchor, constant: 10),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 250),
+            divisionLine4.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
+            divisionLine4.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+
+            dateAndTimeLabel.topAnchor.constraint(equalTo: divisionLine4.bottomAnchor, constant: 15),
             dateAndTimeLabel.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
             dateAndTimePicker.centerYAnchor.constraint(equalTo: dateAndTimeLabel.centerYAnchor),
             dateAndTimePicker.leftAnchor.constraint(equalTo: dateAndTimeLabel.rightAnchor, constant: 10),
+            divisionLineUnderDate.topAnchor.constraint(equalTo: dateAndTimeLabel.bottomAnchor, constant: 15),
+            divisionLineUnderDate.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
 
-            mainTextField.topAnchor.constraint(equalTo: dateAndTimeLabel.bottomAnchor, constant: 30),
-            mainTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            mainTextField.widthAnchor.constraint(equalToConstant: 350),
-            mainTextField.bottomAnchor.constraint(equalTo: mainScroll.bottomAnchor, constant: -10),
+            mainTextView.topAnchor.constraint(equalTo: dateAndTimeLabel.bottomAnchor, constant: 20),
+            mainTextView.leftAnchor.constraint(equalTo: mainScroll.leftAnchor, constant: 20),
+            mainTextView.widthAnchor.constraint(equalToConstant: 350),
+            mainTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
         ])
     }
+    
+}
 
-    /*
-    // MARK: - Navigation
+//MARK: - UITextFieldDelegate
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension WritingLetterViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {  // 정확하게 이게 뭔가?
+        
     }
-    */
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if titleTextField.textColor == .gray || senderTextField.textColor == .gray
+            || receiverTextField.textColor == .gray || passwordTextField.textColor == .gray{
+            textField.text = nil
+            textField.textColor = .black
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if titleTextField.text == nil {
+            
+        }
+    }
+    
+}
 
+//MARK: - UITextAreaDelegate
+
+extension WritingLetterViewController: UITextViewDelegate {
+    
+//    func textViewDidChangeSelection(_ textView: UITextView) {
+//        <#code#>
+//    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if mainTextView.textColor == .gray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+ 
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if textView.text.isEmpty {
+            textView.text = "편지를 작성하세요."
+            textView.textColor = .gray
+        }
+        
+    }
+    
 }
