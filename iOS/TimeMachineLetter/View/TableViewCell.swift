@@ -32,7 +32,6 @@ class TableViewCell: UITableViewCell {
         contentView.addSubview(time)
         contentView.addSubview(badge)
         
-        
         NSLayoutConstraint.activate([
             
             badge.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),

@@ -38,6 +38,7 @@ class OpenedViewController: UIViewController {
         let navBarButton = UIButton()
         navBarButton.translatesAutoresizingMaskIntoConstraints = false
         navBarButton.setImage(UIImage(named: "write"), for: .normal)
+        navBarButton.addTarget(self, action: #selector(writeAction), for: .touchUpInside)
         navBar.addSubview(navBarButton)
         
         NSLayoutConstraint.activate([
@@ -59,6 +60,12 @@ class OpenedViewController: UIViewController {
             navBarButton.heightAnchor.constraint(equalToConstant: 30),
             navBarButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -20)
         ])
+
+    }
+    @objc func writeAction(sender: UIButton!) {
+        let writeVC = WritingLetterViewController()
+        writeVC.modalPresentationStyle = .fullScreen
+        present(writeVC, animated: true)
     }
 }
 

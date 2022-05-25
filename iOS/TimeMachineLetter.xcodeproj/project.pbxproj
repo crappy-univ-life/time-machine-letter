@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4210F8A6283DCF4E000DC57B /* ClosedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4210F8A5283DCF4E000DC57B /* ClosedViewController.swift */; };
 		42393ADC283CBF8F009FD571 /* OpenedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42393ADB283CBF8F009FD571 /* OpenedViewController.swift */; };
 		424BED63283A76ED00B2CBB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BED62283A76ED00B2CBB5 /* LoginViewController.swift */; };
 		42966134283BBC1900D58494 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42966133283BBC1900D58494 /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4210F8A5283DCF4E000DC57B /* ClosedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosedViewController.swift; sourceTree = "<group>"; };
 		42393ADB283CBF8F009FD571 /* OpenedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedViewController.swift; sourceTree = "<group>"; };
 		42393ADD283CBFF3009FD571 /* ClosedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedViewController.swift; sourceTree = "<group>"; };
 		424BED62283A76ED00B2CBB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4210F8A4283DCCF3000DC57B /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				42393ADD283CBFF3009FD571 /* ClosedViewController.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		424BED5F283A744500B2CBB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,9 +72,10 @@
 				53AD286D283DF20300CA7F2A /* ClosedViewController.swift */,
 				424BED62283A76ED00B2CBB5 /* LoginViewController.swift */,
 				42966133283BBC1900D58494 /* MainViewController.swift */,
-				42966135283BC11800D58494 /* TableViewCell.swift */,
+				4210F8A5283DCF4E000DC57B /* ClosedViewController.swift */,
 				42393ADB283CBF8F009FD571 /* OpenedViewController.swift */,
 				53AD2849283CA7AB00CA7F2A /* WritingLetterViewController.swift */,
+				42966135283BC11800D58494 /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
