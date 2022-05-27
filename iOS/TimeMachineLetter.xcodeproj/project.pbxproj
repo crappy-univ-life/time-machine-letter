@@ -21,8 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4210F8A5283DCF4E000DC57B /* ClosedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosedViewController.swift; sourceTree = "<group>"; };
 		42393ADB283CBF8F009FD571 /* OpenedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedViewController.swift; sourceTree = "<group>"; };
-		42393ADD283CBFF3009FD571 /* ClosedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedViewController.swift; sourceTree = "<group>"; };
 		424BED62283A76ED00B2CBB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42966133283BBC1900D58494 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		42966135283BC11800D58494 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -62,9 +62,10 @@
 				53AD286D283DF20300CA7F2A /* ClosedViewController.swift */,
 				424BED62283A76ED00B2CBB5 /* LoginViewController.swift */,
 				42966133283BBC1900D58494 /* MainViewController.swift */,
-				42966135283BC11800D58494 /* TableViewCell.swift */,
+				4210F8A5283DCF4E000DC57B /* ClosedViewController.swift */,
 				42393ADB283CBF8F009FD571 /* OpenedViewController.swift */,
 				53AD2849283CA7AB00CA7F2A /* WritingLetterViewController.swift */,
+				42966135283BC11800D58494 /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -81,7 +82,6 @@
 			children = (
 				429ADB2928198B6D00C97DC1 /* TimeMachineLetter */,
 				429ADB2828198B6D00C97DC1 /* Products */,
-				53AD286C283DF1A900CA7F2A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,14 +106,6 @@
 				429ADB3828198B6E00C97DC1 /* Info.plist */,
 			);
 			path = TimeMachineLetter;
-			sourceTree = "<group>";
-		};
-		53AD286C283DF1A900CA7F2A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				42393ADD283CBFF3009FD571 /* ClosedViewController.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

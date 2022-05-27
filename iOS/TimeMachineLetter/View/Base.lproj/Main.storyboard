@@ -24,21 +24,6 @@
             </objects>
             <point key="canvasLocation" x="-303" y="61"/>
         </scene>
-        <!--Main View Controller-->
-        <scene sceneID="PZD-A4-t7z">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gub-UX-CXR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="MainViewController" id="Ics-0v-Fzc" customClass="MainViewController" customModule="TimeMachineLetter" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="64q-lx-WsP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="lM0-vV-6to"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="470" y="61"/>
-        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

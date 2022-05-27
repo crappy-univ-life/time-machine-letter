@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
                 
-        let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let mainVC = MainViewController()
         mainVC.modalPresentationStyle = .fullScreen
         present(mainVC, animated: true)
     }

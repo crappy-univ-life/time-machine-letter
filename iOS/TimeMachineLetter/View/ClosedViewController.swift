@@ -37,6 +37,7 @@ class ClosedViewController: UIViewController {
         let navBarButton = UIButton()
         navBarButton.translatesAutoresizingMaskIntoConstraints = false
         navBarButton.setImage(UIImage(named: "write"), for: .normal)
+        navBarButton.addTarget(self, action: #selector(writeAction), for: .touchUpInside)
         navBar.addSubview(navBarButton)
         
         NSLayoutConstraint.activate([
@@ -58,6 +59,14 @@ class ClosedViewController: UIViewController {
             navBarButton.heightAnchor.constraint(equalToConstant: 30),
             navBarButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -20)
         ])
+        
+        
+
+    }
+    
+    @objc func writeAction(sender: UIButton!) {
+        let writeVC = WritingLetterViewController()
+        present(writeVC, animated: true)
     }
 }
 
@@ -78,11 +87,3 @@ extension ClosedViewController: UITableViewDataSource {
         return cell
     }
 }
-
-
-
-
-
-
-
-

@@ -46,6 +46,7 @@ class WritingLetterViewController: UIViewController {
         button.setTitle("취소", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         
         return button
     }()
@@ -94,7 +95,7 @@ class WritingLetterViewController: UIViewController {
         var textField = UITextField()
         textField.text = "여기는 제목 입력하는 곳"
         textField.textColor = .gray
-        textField.font?.withSize(15)
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -116,7 +117,7 @@ class WritingLetterViewController: UIViewController {
         var textField = UITextField()
         textField.text = "여기는 보내는 사람"
         textField.textColor = .gray
-        textField.font?.withSize(15)
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
 
         return textField
@@ -138,7 +139,7 @@ class WritingLetterViewController: UIViewController {
         var textField = UITextField()
         textField.text = "여기는 받는 사람"
         textField.textColor = .gray
-        textField.font?.withSize(15)
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -160,7 +161,7 @@ class WritingLetterViewController: UIViewController {
         var textField = UITextField()
         textField.text = "여기는 비밀번호"
         textField.textColor = .gray
-        textField.font?.withSize(15)
+        textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -380,6 +381,9 @@ class WritingLetterViewController: UIViewController {
         ])
     }
     
+    @objc func backAction(sender: UIButton!) {
+        dismiss(animated: true)
+    }
 }
 
 //MARK: - UITextFieldDelegate
