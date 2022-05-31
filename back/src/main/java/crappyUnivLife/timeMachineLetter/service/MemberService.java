@@ -1,8 +1,6 @@
 package crappyUnivLife.timeMachineLetter.service;
 
-import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
-import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
 import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

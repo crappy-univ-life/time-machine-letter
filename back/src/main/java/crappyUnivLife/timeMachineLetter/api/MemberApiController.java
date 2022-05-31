@@ -1,7 +1,6 @@
 package crappyUnivLife.timeMachineLetter.api;
 
 import crappyUnivLife.timeMachineLetter.domain.Letter;
-import crappyUnivLife.timeMachineLetter.domain.Member;
 import crappyUnivLife.timeMachineLetter.dto.DecryptionLetterRequest;
 import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
@@ -9,12 +8,10 @@ import crappyUnivLife.timeMachineLetter.dto.ReceivePostListResponse;
 import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
 import crappyUnivLife.timeMachineLetter.service.LetterService;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
