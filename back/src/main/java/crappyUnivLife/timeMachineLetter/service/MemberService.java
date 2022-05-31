@@ -26,8 +26,7 @@ public class MemberService {
     private final LetterService letterService;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public LetterListResponse kakaoLogin(String authorizedCode, HttpSession session) {
-        String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
+    public LetterListResponse kakaoLogin(String accessToken, HttpSession session) {
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
         //기존에 없던 회원이면 회원가입 - DB에 저장

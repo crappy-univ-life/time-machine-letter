@@ -6,6 +6,7 @@ import crappyUnivLife.timeMachineLetter.dto.DecryptionLetterRequest;
 import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.dto.LetterReadResponse;
 import crappyUnivLife.timeMachineLetter.dto.ReceivePostListResponse;
+import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
 import crappyUnivLife.timeMachineLetter.service.LetterService;
 import crappyUnivLife.timeMachineLetter.service.MemberService;
 import lombok.Data;
@@ -21,11 +22,18 @@ public class MemberApiController {
 
     private final MemberService memberService;
     private final LetterService letterService;
+    private final KakaoOAuth2 kakaoOAuth2;
 
 
     @PostMapping("/user/login")
-    public LetterListResponse loginRequest(@RequestBody String authorizedCode, HttpSession session) {
-        return memberService.kakaoLogin(authorizedCode, session);
+    public LetterListResponse kakaoCodeLoginRequest(@RequestBody String authorizedCode, HttpSession session) {
+        String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
+        return memberService.kakaoLogin(accessToken, session);
+    }
+
+    @PostMapping("/user/token-login")
+    public LetterListResponse kakaoTokenLoginRequest(@RequestBody String accessToken, HttpSession session) {
+        return memberService.kakaoLogin(accessToken, session);
     }
 
     @PostMapping("/user/logout")
