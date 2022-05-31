@@ -1,8 +1,6 @@
 package crappyUnivLife.timeMachineLetter.service;
 
-import crappyUnivLife.timeMachineLetter.domain.Letter;
 import crappyUnivLife.timeMachineLetter.domain.Member;
-import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
 import crappyUnivLife.timeMachineLetter.dto.LetterListResponse;
 import crappyUnivLife.timeMachineLetter.repository.MemberRepository;
 import crappyUnivLife.timeMachineLetter.security.kakao.KakaoOAuth2;
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +22,7 @@ public class MemberService {
     private final LetterService letterService;
     private final KakaoOAuth2 kakaoOAuth2;
 
-    public LetterListResponse kakaoLogin(String authorizedCode, HttpSession session) {
-        String accessToken = kakaoOAuth2.getAccessToken(authorizedCode);
+    public LetterListResponse kakaoLogin(String accessToken, HttpSession session) {
         Member member = kakaoOAuth2.getUserInfoByAccessToken(accessToken);
 
         //기존에 없던 회원이면 회원가입 - DB에 저장

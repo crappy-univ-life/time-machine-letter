@@ -1,7 +1,6 @@
 package crappyUnivLife.timeMachineLetter.security.kakao;
 
 import crappyUnivLife.timeMachineLetter.domain.Member;
-import crappyUnivLife.timeMachineLetter.dto.KakaoUserInfo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -10,7 +9,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 
 @Service
 public class KakaoOAuth2 {
