@@ -6,14 +6,14 @@
 //
 
 import UIKit
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        KakaoSDK.initSDK(appKey: "0f7c562ef7290c531eee4099f7d3706e")
         return true
     }
 
@@ -31,6 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    
 }
 

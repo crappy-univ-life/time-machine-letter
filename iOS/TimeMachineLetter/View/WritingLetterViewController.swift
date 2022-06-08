@@ -20,7 +20,9 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
         func updateUIViewController(_ uiViewController: WritingLetterViewController, context: Context) {
         }
 }
+
 @available(iOS 13.0.0, *)
+
 struct ViewPreview: PreviewProvider {
     static var previews: some View {
         ViewControllerRepresentable()
