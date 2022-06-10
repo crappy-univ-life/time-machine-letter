@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Alamofire
 
 //MARK: - SwiftUI Preview
 
@@ -77,7 +78,7 @@ class WritingLetterViewController: UIViewController {
         button.setTitle("보내기버튼", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+        button.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
         return button
     }()
     
@@ -242,6 +243,8 @@ class WritingLetterViewController: UIViewController {
         picker.timeZone = .autoupdatingCurrent
         picker.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        
         return picker
     }()
     
@@ -261,9 +264,12 @@ class WritingLetterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         addingView()
         settingLayout()
         delegating()
+        
+        
     }
     
     //MARK: - addingView
@@ -385,6 +391,36 @@ class WritingLetterViewController: UIViewController {
     
     @objc func backAction(sender: UIButton!) {
         dismiss(animated: true)
+    }
+    
+    @objc func submitAction(sender: UIButton!) {
+        let letterModel = LetterModel(
+            openAt: getTime(dateAndTimePicker.date),
+            title: titleTextField.text ?? "none",
+            content: mainTextView.text ?? "none",
+            letterTo: receiverTextField.text ?? "none",
+            letterFrom: senderTextField.text ?? "none",
+            password: passwordTextField.text ?? "none"
+        )
+
+        AF.request("http://timemachineletter.tk:8080/letter", method: .post, parameters: letterModel, encoder: JSONParameterEncoder.default).validate().responseData { response in
+            debugPrint(response)
+            switch response.result {
+            case .success, .failure(Alamofire.AFError.responseSerializationFailed(reason: Alamofire.AFError.ResponseSerializationFailureReason.inputDataNilOrZeroLength)):
+                print("Validation Successful")
+                self.dismiss(animated: true)
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    func getTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let strDate = dateFormatter.string(from: date)
+        
+        return strDate
     }
 }
 
