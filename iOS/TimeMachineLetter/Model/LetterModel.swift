@@ -1,5 +1,5 @@
 //
-//  LetterForm.swift
+//  LetterModel.swift
 //  TimeMachineLetter
 //
 //  Created by Dean on 2022/06/08.

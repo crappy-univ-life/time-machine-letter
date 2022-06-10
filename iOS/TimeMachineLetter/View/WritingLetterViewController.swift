@@ -6,31 +6,7 @@
 //
 
 import UIKit
-import SwiftUI
 import Alamofire
-
-//MARK: - SwiftUI Preview
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    typealias UIViewControllerType = WritingLetterViewController
-    
-    func makeUIViewController(context: Context) -> WritingLetterViewController {
-            return WritingLetterViewController()
-        }
-
-        func updateUIViewController(_ uiViewController: WritingLetterViewController, context: Context) {
-        }
-}
-
-@available(iOS 13.0.0, *)
-
-struct ViewPreview: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-}
-
-//MARK: - WritingLetterViewController
 
 class WritingLetterViewController: UIViewController {
     
@@ -96,7 +72,7 @@ class WritingLetterViewController: UIViewController {
     
     private let titleTextField: UITextField = {
         var textField = UITextField()
-        textField.text = "여기는 제목 입력하는 곳"
+        textField.text = ""
         textField.textColor = .gray
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +94,7 @@ class WritingLetterViewController: UIViewController {
     
     private let senderTextField: UITextField = {
         var textField = UITextField()
-        textField.text = "여기는 보내는 사람"
+        textField.text = ""
         textField.textColor = .gray
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +116,7 @@ class WritingLetterViewController: UIViewController {
     
     private let receiverTextField: UITextField = {
         var textField = UITextField()
-        textField.text = "여기는 받는 사람"
+        textField.text = ""
         textField.textColor = .gray
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -162,7 +138,7 @@ class WritingLetterViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         var textField = UITextField()
-        textField.text = "여기는 비밀번호"
+        textField.text = ""
         textField.textColor = .gray
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -261,6 +237,7 @@ class WritingLetterViewController: UIViewController {
     }()
     
     //MARK: - viewDidLoad
+    var letterManager = LetterManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -268,7 +245,6 @@ class WritingLetterViewController: UIViewController {
         addingView()
         settingLayout()
         delegating()
-        
         
     }
     
@@ -315,6 +291,7 @@ class WritingLetterViewController: UIViewController {
         receiverTextField.delegate = self
         passwordTextField.delegate = self
         mainTextView.delegate = self
+        letterManager.delegate = self
     }
     
     //MARK: - settingLayout
@@ -389,38 +366,23 @@ class WritingLetterViewController: UIViewController {
         ])
     }
     
+// MARK: - buttonAction
+    
     @objc func backAction(sender: UIButton!) {
         dismiss(animated: true)
     }
     
     @objc func submitAction(sender: UIButton!) {
+        
         let letterModel = LetterModel(
-            openAt: getTime(dateAndTimePicker.date),
+            openAt: letterManager.getTime(dateAndTimePicker.date),
             title: titleTextField.text ?? "none",
             content: mainTextView.text ?? "none",
             letterTo: receiverTextField.text ?? "none",
             letterFrom: senderTextField.text ?? "none",
             password: passwordTextField.text ?? "none"
         )
-
-        AF.request("http://timemachineletter.tk:8080/letter", method: .post, parameters: letterModel, encoder: JSONParameterEncoder.default).validate().responseData { response in
-            debugPrint(response)
-            switch response.result {
-            case .success, .failure(Alamofire.AFError.responseSerializationFailed(reason: Alamofire.AFError.ResponseSerializationFailureReason.inputDataNilOrZeroLength)):
-                print("Validation Successful")
-                self.dismiss(animated: true)
-            case let .failure(error):
-                print(error)
-            }
-        }
-    }
-    
-    func getTime(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let strDate = dateFormatter.string(from: date)
-        
-        return strDate
+        letterManager.postLetter(with: letterModel)
     }
 }
 
@@ -439,7 +401,6 @@ extension WritingLetterViewController: UITextFieldDelegate {
             textField.text = nil
             textField.textColor = .black
         }
-        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -448,7 +409,6 @@ extension WritingLetterViewController: UITextFieldDelegate {
             
         }
     }
-    
 }
 
 //MARK: - UITextAreaDelegate
@@ -465,7 +425,6 @@ extension WritingLetterViewController: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
- 
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -474,7 +433,20 @@ extension WritingLetterViewController: UITextViewDelegate {
             textView.text = "편지를 작성하세요."
             textView.textColor = .gray
         }
-        
+    }
+}
+
+// MARK: - LetterManagerDelegate
+
+extension WritingLetterViewController: LetterManagerDelegate {
+    
+    func didPostSuccess() {
+        self.dismiss(animated: true)
     }
     
+    func didFailWithError(error: Error) {
+        let alert = UIAlertController(title: "편지작성 실패", message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+        self.present(alert, animated: true)
+    }
 }
