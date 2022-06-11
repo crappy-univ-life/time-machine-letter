@@ -6,7 +6,7 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import { Children, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import LetterList from '../components/LetterList/LetterList';
+import LetterList from '../components/LetterList';
 import style from '../css/Main.module.css';
 import WriteLetter from '../components/WriteLetter';
 import { openWriteModal } from '../store/global';
