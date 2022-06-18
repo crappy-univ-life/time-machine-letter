@@ -13,11 +13,12 @@ describe('LetterDetail 테스트 코드', () => {
         },
       },
     });
-    screen.findByText('발신자:');
-    await screen.findByText('발신자: 개발자');
-    await screen.findByText('수신자: 뭐');
-    await screen.findByText('첫번째 테스트 본문입니다');
-    await screen.findByText('제목1');
+
+    expect(screen.getByText('발신자:')).toBeInTheDocument();
+    expect(await screen.findByText('발신자: 개발자')).toBeInTheDocument();
+    expect(await screen.findByText('수신자: 뭐')).toBeInTheDocument();
+    expect(await screen.findByText('첫번째 테스트 본문입니다')).toBeInTheDocument();
+    expect(await screen.findByText('제목1')).toBeInTheDocument();
   });
   it('삭제버튼을 클릭했을때 삭제에 성공한다', async () => {
     render(<LetterDetail />, {
