@@ -10,7 +10,7 @@ export default function LetterListCard({ letter, onCardClick }) {
         bordered={false}
         hoverable
         className={style.card}
-        onClick={onCardClick(letter.hash)}
+        onClick={() => onCardClick(letter.hash)}
       >
         <Meta title={letter.title} description={moment(letter.createAt).format('YYYY-MM-DD')} />
       </Card>
