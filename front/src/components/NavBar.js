@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import style from '../css/NavBar.module.css';
 import { openWriteModal } from '../store/global';
 
-function NavBar({ setLetterMode }) {
+function NavBar({ setLetterMode, logout }) {
   const dispatch = useDispatch();
   const onClickAllLetters = () => {
     setLetterMode({ allLetter: true, closeLetter: false, openLetter: false });
@@ -21,7 +21,7 @@ function NavBar({ setLetterMode }) {
       <Col onClick={onClickOpenLetters}><span>열람 가능 편지</span></Col>
       <Col onClick={() => dispatch(openWriteModal())}><span>편지 작성</span></Col>
       <Col />
-      <Col><span>로그아웃</span></Col>
+      <Col onClick={() => logout()}><span>로그아웃</span></Col>
     </Row>
   );
 }

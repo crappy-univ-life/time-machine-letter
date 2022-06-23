@@ -42,14 +42,14 @@ function PasswordInput({ setLetterData }) {
 
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
-    return <p>비밀번호를 입력해 주세요</p>;
+    return <p style={{ color: 'white' }}>비밀번호를 입력해 주세요</p>;
   }
   const { hours, minutes, seconds } = formatTime(remainingTime);
   return (
     <div className="timer">
       <div className="text"><h1>남은시간</h1></div>
       <div>
-        <p>{hours}:{minutes}:{seconds}</p>
+        <p style={{ color: 'white' }}>{hours}:{minutes}:{seconds}</p>
       </div>
     </div>
   );
@@ -58,11 +58,11 @@ const renderTime = ({ remainingTime }) => {
 function LetterLoading({ data, setLetterData }) {
   const [isFinish, setIsFinish] = useState(false);
   const nowTime = new Date().getTime();
-  const openTime = formatOpenTime(data);
+  const openTime = formatOpenTime(data.openAt);
   const duration = (openTime - nowTime) / 1000;
 
   return (
-    <Row className={style.content} style={{ height: '100vh', alignItems: 'center' }}>
+    <Row style={{ justifyContent: 'center', background: '#272D40', height: '100vh', alignItems: 'center' }}>
       <Col md={10} xs={23} align="center">
         <Row style={{ marginTop: '20px' }}>
           <Col xs={24}>
