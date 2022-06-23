@@ -49,7 +49,7 @@ const renderTime = ({ remainingTime }) => {
     <div className="timer">
       <div className="text"><h1>남은시간</h1></div>
       <div>
-        <p>{hours}:{minutes}:{seconds}</p>
+        <p style={{ color: 'white' }}>{hours}:{minutes}:{seconds}</p>
       </div>
     </div>
   );
