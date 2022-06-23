@@ -72,7 +72,7 @@ class LetterServiceTest {
         letter.setMember(member);
         letterService.createLetter(letter, session);
 
-        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null);
+        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null, null);
         Assertions.assertTrue(resultLetter.getReadable());
     }
 
@@ -94,7 +94,7 @@ class LetterServiceTest {
         letter.setMember(member);
         letterService.createLetter(letter, session);
 
-        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null);
+        LetterReadResponse resultLetter = letterService.readLetter(letter.getHash(), null, null);
 
         Assertions.assertFalse(resultLetter.getReadable());
     }
