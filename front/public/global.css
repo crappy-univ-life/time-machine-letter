@@ -18,11 +18,15 @@ h1 {
 }
 
 .ant-modal-content {
-    background-color: #383838;
+    background-color: #272D40;
+}
+
+.ant-modal-body {
+    padding: 0%;
 }
 
 .ant-modal-header {
-    background-color: #383838;
+    background-color: #272D40;
 }
 
 .ant-input {
