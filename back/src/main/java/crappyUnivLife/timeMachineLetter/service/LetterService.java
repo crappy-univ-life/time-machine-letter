@@ -78,16 +78,47 @@ public class LetterService {
         }
     }
 
+    public LetterReadResponse readLetter(String hash, String requestPassword, HttpSession session) {
+        Optional<Letter> letter = letterRepository.findByHash(hash);
+        System.out.println(1);
+
+        if(letter.isPresent()) {
+            System.out.println(2);
+            LetterReadResponse letterReadResponse = new LetterReadResponse(letter.get());
+
+            if (letter.get().getMember().getId().equals((Long) session.getAttribute("userId"))) {
+                System.out.println(3);
+                return letterReadResponse;
+            }
+
+            validateOpenAt(letterReadResponse);
+
+            // password 가 있을 경우, 패스워드 확인
+            if ( requestPassword != null ) {
+                System.out.println("requestPassword = " + requestPassword);
+                validatePassword(letterReadResponse, requestPassword, letter.get().getPassword());
+            } else if (letterReadResponse.getIsEncrypted()) {
+                letterReadResponse.setTitle(null);
+                letterReadResponse.setContent(null);
+            }
+
+            return letterReadResponse;
+        } else {
+            System.out.println("유효하지 않은 편지" + hash);
+            return null;
+        }
+    }
+
     public LetterReadResponse readLetter(String hash, String requestPassword) {
         Optional<Letter> letter = letterRepository.findByHash(hash);
 
         if(letter.isPresent()) {
             LetterReadResponse letterReadResponse = new LetterReadResponse(letter.get());
-
             validateOpenAt(letterReadResponse);
 
             // password 가 있을 경우, 패스워드 확인
-            if (requestPassword != null) {
+            if ( requestPassword != null ) {
+                System.out.println("requestPassword = " + requestPassword);
                 validatePassword(letterReadResponse, requestPassword, letter.get().getPassword());
             } else if (letterReadResponse.getIsEncrypted()) {
                 letterReadResponse.setTitle(null);
@@ -104,8 +135,10 @@ public class LetterService {
     private void validatePassword(LetterReadResponse letterReadResponse, String requestPassword, String password) {
 
         if(passwordEncoder.matches(requestPassword, password)) {
+            System.out.println("복호화 성공");
             letterReadResponse.setIsEncrypted(false);
         } else {
+            System.out.println("복호화 실패");
             letterReadResponse.setTitle(null);
             letterReadResponse.setContent(null);
         }
