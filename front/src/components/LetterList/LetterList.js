@@ -24,7 +24,7 @@ function LetterList({ openLetter, closeLetter, allLetter }) {
     dispatch(openDetailModal(hash));
   };
   return (
-    <Row gutter={[20, 20]} align="center" sm={12}>
+    <Row gutter={[20, 20]} align="center" justify="center">
       {showList.map((letter) => (
         <LetterListCard letter={letter} onCardClick={onCardClick} key={letter.hash} />
       ))}
