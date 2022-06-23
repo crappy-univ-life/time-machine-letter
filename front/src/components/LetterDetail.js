@@ -39,14 +39,14 @@ function LetterDetail() {
   const modal = useSelector((state) => state.global.detailModal);
   const LetterHash = useSelector((state) => state.global.LetterHash);
   const dispatch = useDispatch();
-  const { data, isLoading, refetch } = useGetSingleLetterQuery(LetterHash);
-  // const { isLoading, data } = dummyQuery();
+  // const { data, isLoading, refetch } = useGetSingleLetterQuery(LetterHash);
+  const { isLoading, data } = dummyQuery();
   const [letterDelete, result] = useDeleteLetterMutation();
-  useEffect(() => {
-    if (modal) {
-      refetch();
-    }
-  }, [modal]);
+  // useEffect(() => {
+  //   if (modal) {
+  //     refetch();
+  //   }
+  // }, [modal]);
   useEffect(() => {
     if (result.isSuccess) {
       alert('삭제되었습니다');
@@ -61,32 +61,31 @@ function LetterDetail() {
       visible={modal}
       onCancel={() => dispatch(closeDetailModal())}
       footer={[
-        <Button type="info" onClick={() => dispatch(openPreviewModal())}>
-          미리보기
+        <Button style={{ backgroundColor: '#EAEFF9', borderRadius: '10px' }} onClick={() => dispatch(openPreviewModal())}>
+          <p style={{ color: 'black' }}>미리보기</p>
         </Button>,
-        <Button type="success" onClick={() => { dispatch(openUpdateModal()); dispatch(closeDetailModal()); }}>
-          수정
+        <Button style={{ backgroundColor: '#EAEFF9', borderRadius: '10px' }} onClick={() => { dispatch(openUpdateModal()); dispatch(closeDetailModal()); }}>
+          <p style={{ color: 'black' }}>수정</p>
         </Button>,
-        <Button type="danger" onClick={() => letterDelete(LetterHash)}>
-          삭제
+        <Button style={{ backgroundColor: '#EA6F66', borderColor: '#EA6F66', borderRadius: '10px' }} onClick={() => letterDelete(LetterHash)}>
+          <p style={{ color: 'black' }}>삭제</p>
         </Button>]}
     >
       <div style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>
-        <p>{data && `http://timemachineletter.tk/letter/${LetterHash}`}</p>
-        <hr />
-        <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && formatOpenTime(data.openAt)} />
-        <hr />
-        <div style={{ padding: '10px' }}>
-          <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data?.title}</h1>
+        <div style={{ backgroundColor: '#2E364F', width: '100%', padding: '20px' }}>
+          <Countdown title="개봉까지 남은시간" value={isLoading ? 0 : data && formatOpenTime(data.openAt)} />
         </div>
-        <div style={{ padding: '10px' }}>
+        <div style={{ padding: '10px', backgroundColor: '#2E364F', marginTop: '20px' }}>
+          <h1>{isLoading ? <Skeleton.Button active shape="round" /> : data?.title}</h1>
           <p>{isLoading ? <Skeleton.Button active shape="round" /> : data?.content }</p>
         </div>
       </div>
-      <hr />
-      <div style={{ textAlign: 'end' }}>
+      <div style={{ textAlign: 'end', backgroundColor: '#2E364F', padding: '20px' }}>
         <p>발신자: {isLoading ? <Skeleton.Button active shape="round" /> : data?.letterFrom }</p>
         <p>수신자: {isLoading ? <Skeleton.Button active shape="round" /> : data?.letterTo }</p>
+      </div>
+      <div style={{ textAlign: 'center', backgroundColor: '#2E364F', marginTop: '20px', padding: '10px' }}>
+        <p>{data && `http://timemachineletter.tk/letter/${LetterHash}`}</p>
       </div>
     </Modal>
   );
