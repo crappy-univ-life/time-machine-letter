@@ -11,7 +11,7 @@ import { convertSendDate } from '../utils/converter';
 
 const { TextArea } = Input;
 
-function WriteLetter() {
+function LetterWrite() {
   const modalVisible = useSelector((state) => state.global.writeModal);
   const dispatch = useDispatch();
   const { handleSubmit, control, getValues, reset } = useForm();
@@ -39,19 +39,19 @@ function WriteLetter() {
       visible={modalVisible}
       onCancel={() => dispatch(closeWriteModal())}
       footer={[
-        <Button type="info" onClick={() => { dispatch(setSingleLetter(convertSendDate(getValues()))); dispatch(openPreviewModal()); }}>
-          미리보기
+        <Button style={{ backgroundColor: '#EAEFF9', borderRadius: '10px' }} onClick={() => { dispatch(setSingleLetter(convertSendDate(getValues()))); dispatch(openPreviewModal()); }}>
+          <p style={{ color: 'black' }}>미리보기</p>
         </Button>,
         <LetterPreviewModal />,
-        <Button type="primary" onClick={() => { formRef.current.submit(); }}>
-          발송
+        <Button style={{ backgroundColor: '#EAEFF9', borderRadius: '10px' }} onClick={() => { formRef.current.submit(); }}>
+          <p style={{ color: 'black' }}>수정</p>
         </Button>,
-        <Button type="danger" onClick={() => dispatch(closeWriteModal())}>
-          close
+        <Button style={{ backgroundColor: '#EA6F66', borderColor: '#EA6F66', borderRadius: '10px' }} onClick={() => dispatch(closeWriteModal())}>
+          <p style={{ color: 'black' }}>닫기</p>
         </Button>]}
     >
       <Form onFinish={handleSubmit(onSubmit)} ref={formRef}>
-        <Row justify="center">
+        <Row justify="center" style={{ marginTop: '20px' }}>
           <Col>
             <Controller
               control={control}
@@ -84,46 +84,41 @@ function WriteLetter() {
           control={control}
           name="letterFrom"
           render={({ field: { onChange, onBlur, value } }) => (
-            <Input addonBefore="발신인" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
+            <Input addonBefore="발신인" style={{ marginTop: '20px', padding: '20px', backgroundColor: '#2E364F' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
-        <hr />
         <Controller
           control={control}
           name="password"
           render={({ field: { onChange, onBlur, value } }) => (
-            <Input.Password placeholder=" password" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
+            <Input.Password addonBefore="비밀번호" placeholder=" password" style={{ marginTop: '20px', padding: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
-        <hr />
         <Controller
           control={control}
           name="title"
           render={({ field: { onChange, onBlur, value } }) => (
-            <Input placeholder="편지 제목" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
+            <Input addonBefore="제목" placeholder="편지 제목" style={{ marginTop: '20px', padding: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
-        <hr />
         <Controller
           control={control}
           name="content"
           render={({ field: { onChange, onBlur, value } }) => (
-            <TextArea rows={8} placeholder="편지 본문" style={{ marginTop: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
+            <TextArea addonBefore="내용" rows={8} placeholder="편지 본문" style={{ marginTop: '20px', padding: '20px' }} bordered={false} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
-        <hr />
         <Controller
           control={control}
           name="letterTo"
           render={({ field: { onChange, onBlur, value } }) => (
-            <Input addonBefore="수신인" style={{ marginTop: '20px' }} onChange={onChange} onBlur={onBlur} value={value} />
+            <Input addonBefore="수신인" style={{ marginTop: '20px', padding: '20px' }} onChange={onChange} onBlur={onBlur} value={value} />
           )}
         />
-        <hr />
       </Form>
     </Modal>
 
   );
 }
 
-export default WriteLetter;
+export default LetterWrite;

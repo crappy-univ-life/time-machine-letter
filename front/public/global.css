@@ -14,7 +14,7 @@ h1 {
 }
 
 .ant-picker {
-    background-color: #383838;
+    background-color: #2E364F;
 }
 
 .ant-modal-content {
@@ -30,23 +30,28 @@ h1 {
 }
 
 .ant-input {
-    background-color: #383838;
-    color: white
+    background-color: #2E364F;
+    color: white;
+}
+
+.ant-input-group-wrapper,
+.textarea.ant-input {
+    background-color: #2E364F;
 }
 
 .ant-input-group * {
-    background-color: #383838;
+    background-color: #2E364F;
     color: white;
     border: none;
 }
 
 .ant-input-password {
-    background-color: #383838;
+    background-color: #2E364F;
     color: white
 }
 
 .ant-input-password-icon {
-    color: white !important
+    color: #2E364F !important
 }
 
 .ant-picker-input * {
