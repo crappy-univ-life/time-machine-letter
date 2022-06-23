@@ -7,23 +7,23 @@ import img from '../img/bonfire.jpg';
 
 function Letter({ data }) {
   return (
-    <Row className={style.content} style={{ height: '100vh%' }}>
+    <Row style={{ justifyContent: 'center', background: '#272D40', height: '100vh%' }}>
       <Col md={10} xs={23} align="center" className={style.backgroundImg}>
         <Row justify="center" align="middle" style={{ height: '90vh', padding: '14px' }}>
           <Col>
             <div>
-              <h1>{data.title}</h1>
+              <h1 style={{ color: 'white' }}>{data.title}</h1>
             </div>
             <hr />
             <div style={{ textAlign: 'right', padding: '10px' }}>
-              <p>{data.letterFrom}</p>
+              <p style={{ color: 'white' }}>{data.letterFrom}</p>
             </div>
             <br />
             <div>
-              <p>{data.content}</p>
+              <p style={{ color: 'white' }}>{data.content}</p>
             </div>
             <br />
-            <h1>{data.letterTo}</h1>
+            <h1 style={{ color: 'white' }}>{data.letterTo}</h1>
           </Col>
         </Row>
       </Col>
