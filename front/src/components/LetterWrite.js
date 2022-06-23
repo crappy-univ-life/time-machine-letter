@@ -44,7 +44,7 @@ function LetterWrite() {
         </Button>,
         <LetterPreviewModal />,
         <Button style={{ backgroundColor: '#EAEFF9', borderRadius: '10px' }} onClick={() => { formRef.current.submit(); }}>
-          <p style={{ color: 'black' }}>수정</p>
+          <p style={{ color: 'black' }}>쓰기</p>
         </Button>,
         <Button style={{ backgroundColor: '#EA6F66', borderColor: '#EA6F66', borderRadius: '10px' }} onClick={() => dispatch(closeWriteModal())}>
           <p style={{ color: 'black' }}>닫기</p>
