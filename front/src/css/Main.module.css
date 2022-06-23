@@ -1,5 +1,4 @@
 body {
-    color: white;
     background-color: #121212;
 
 }
@@ -9,7 +8,11 @@ h1 {
 }
 
 .card {
-    background-color: #2a2a2a77;
+    margin-top: 30px;
+    color: black;
+    border-radius: 20px;
+    background-color: #EAEFF9;
+    width: 100%;
 }
 
 .content {

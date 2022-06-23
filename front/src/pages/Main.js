@@ -60,8 +60,10 @@ function Main() {
               <hr size="1" />
             </Col>
           </Row>
-          <Row>
-            <LetterList {...letterMode} />
+          <Row align="center">
+            <Col xs={20}>
+              <LetterList {...letterMode} />
+            </Col>
           </Row>
         </Col>
       </Row>

@@ -5,7 +5,7 @@ import style from '../../css/Main.module.css';
 
 export default function LetterListCard({ letter, onCardClick }) {
   return (
-    <Col lg={12} xs={22}>
+    <Col lg={12} xs={24} md={12}>
       <Card
         bordered={false}
         hoverable

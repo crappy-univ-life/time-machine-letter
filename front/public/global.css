@@ -1,56 +1,55 @@
+body {
+    color: white;
+    background-color: #121212;
 
-
-body{
-    color:white;
-    background-color: #121212 ;
-    
 }
 
-h1{
-    color:white;
+h1 {
+    color: white;
     font-family: 'WandohopeB';
 }
 
-.ant-card-meta-description{
-    color:white
-}
-.ant-card-meta-title{
-    color:white
-}
-.ant-tabs-tab-btn{
-    color:white
+.ant-tabs-tab-btn {
+    color: white
 }
 
-.ant-picker{
+.ant-picker {
     background-color: #383838;
 }
-.ant-modal-content{
+
+.ant-modal-content {
     background-color: #383838;
 }
-.ant-modal-header{
+
+.ant-modal-header {
     background-color: #383838;
 }
 
 .ant-input {
     background-color: #383838;
-    color:white
+    color: white
 }
-.ant-input-group *{
+
+.ant-input-group * {
     background-color: #383838;
-    color:white;
-    border:none;
+    color: white;
+    border: none;
 }
-.ant-input-password{
+
+.ant-input-password {
     background-color: #383838;
-    color:white
+    color: white
 }
-.ant-input-password-icon{
-    color:white !important
+
+.ant-input-password-icon {
+    color: white !important
 }
-.ant-picker-input *{
-    color:white !important
+
+.ant-picker-input * {
+    color: white !important
 }
-.ant-modal-content *{
+
+.ant-modal-content * {
     color: white;
 }
 
