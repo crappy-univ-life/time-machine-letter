@@ -7,7 +7,7 @@ import { Children, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import style from '../css/Main.module.css';
-import WriteLetter from '../components/WriteLetter';
+import LetterWrite from '../components/LetterWrite';
 import { openWriteModal } from '../store/global';
 import { useLogoutMutation } from '../service/login';
 import { useGetLetterListQuery } from '../service/Letter';
@@ -41,7 +41,7 @@ function Main() {
     <>
       <Row align="center">
         <LetterPreviewModal />
-        <WriteLetter />
+        <LetterWrite />
         <LetterUpdate />
         <LetterDetail />
         <Col md={12} xs={20}>

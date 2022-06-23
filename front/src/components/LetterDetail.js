@@ -9,7 +9,7 @@ import { closeDetailModal, openPreviewModal, openUpdateModal, openWriteModal } f
 import { formatOpenTime } from '../utils/time';
 import LetterPreviewModal from './LetterPreviewModal';
 import LetterView from './LetterView';
-import WriteLetter from './WriteLetter';
+import LetterWrite from './LetterWrite';
 
 const dummyQuery = () => {
   const date = new Date('2022-04-04T23:50:00');
